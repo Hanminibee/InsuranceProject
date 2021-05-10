@@ -1,28 +1,24 @@
 package entity;
+
+import type.CancerType;
+
 public class Cancer extends InsuranceProduct {
 
-	private String cancerList;
-	private String guaranteedType;
+	private CancerType[] guaranteedType;
 	private int limitAge;
+	private int[] insuranceMoneys;
+	
 	public CancerHistory m_CancerHistory;
 
 	public Cancer() {
 
 	}
 
-	public String getCancerList() {
-		return cancerList;
-	}
-
-	public void setCancerList(String cancerList) {
-		this.cancerList = cancerList;
-	}
-
-	public String getGuaranteedType() {
+	public CancerType[] getGuaranteedType() {
 		return guaranteedType;
 	}
 
-	public void setGuaranteedType(String guaranteedType) {
+	public void setGuaranteedType(CancerType[] guaranteedType) {
 		this.guaranteedType = guaranteedType;
 	}
 
@@ -42,6 +38,14 @@ public class Cancer extends InsuranceProduct {
 		this.m_CancerHistory = m_CancerHistory;
 	}
 	
+	public int[] getInsuranceMoneys() {
+		return insuranceMoneys;
+	}
+
+	public void setInsuranceMoneys(int[] insuranceMoneys) {
+		this.insuranceMoneys = insuranceMoneys;
+	}
+
 	public Cancer clone() {
 		return (Cancer)super.clone();
 	}

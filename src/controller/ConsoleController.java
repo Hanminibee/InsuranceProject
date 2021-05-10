@@ -4,7 +4,9 @@ import java.util.Scanner;
 import entity.Client;
 import entity.InsuranceProduct;
 import entity.InsuranceProducts;
+import entity.InsuranceProductsAcceptance;
 import entity.Manager;
+import entity.UW;
 import service.ClientServiceImpl;
 import service.InsuranceProductServiceImpl;
 import service.ManagerServiceImpl;
@@ -90,19 +92,19 @@ public class ConsoleController{
 			insuranceProductsMenu();
 			break;
 		case IPA:
-			
+			insuranceProductsAcceptanceMenu();
 			break;
 		case UW:
-			
+			underWriterMenu();
 			break;
 		case CM:
-			
+			contractManagerMenu();
 			break;
 		case CH:
-			
+			compensationHandleMenu();
 			break;
 		case SP:
-			
+			salesPersonMenu();
 			break;
 		}
 	}
@@ -120,6 +122,7 @@ public class ConsoleController{
 				insuranceProductService.add(developedProduct);
 				break;
 			case 2:
+				
 				break;
 			case 3:
 				managerLogin = null;
@@ -127,6 +130,53 @@ public class ConsoleController{
 			}
 		}
 	}
+	
+	private void insuranceProductsAcceptanceMenu() {
+		InsuranceProductsAcceptance ipa = (InsuranceProductsAcceptance)managerLogin;
+		while(true) {
+			System.out.println("\n---InsuranceProductsAcceptanceMenu---");
+			System.out.println("1.보험상품 승인");
+			System.out.println("2.로그아웃");
+			switch(sc.nextInt()) {
+			case 1:
+				break;
+			case 2:
+				managerLogin = null;
+				return;
+			}
+		}
+	}
+	
+	private void underWriterMenu() {
+		UW uw = (UW)managerLogin;
+		while(true) {
+			System.out.println("\n---UWMenu---");
+			System.out.println("1.인수심사하기");
+			System.out.println("2.로그아웃");
+			switch(sc.nextInt()) {
+			case 1:
+				
+				break;
+			case 2:
+				managerLogin = null;
+				return;
+			}
+		}
+	}
+	
+	private void contractManagerMenu() {
+		
+	}
+	
+	private void compensationHandleMenu() {
+		
+	}
+	
+	private void salesPersonMenu() {
+		
+	}
+	
+	
 	
 	//clientMenus
 	private void clientMenu() {

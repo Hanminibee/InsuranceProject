@@ -2,7 +2,7 @@ package entity;
 public class ActualExpense extends InsuranceProduct{
 
 	private String guaranteedType;
-	private int limitOfIndemnity;
+	private int[] limitOfIndemnity;
 	private int limitAge;
 	private int selfPayment;
 	private ActualExpenseHistory m_ActualExpenseHistory;
@@ -19,11 +19,11 @@ public class ActualExpense extends InsuranceProduct{
 		this.guaranteedType = guaranteedType;
 	}
 
-	public int getLimitOfIndemnity() {
+	public int[] getLimitOfIndemnity() {
 		return limitOfIndemnity;
 	}
 
-	public void setLimitOfIndemnity(int limitOfIndemnity) {
+	public void setLimitOfIndemnity(int[] limitOfIndemnity) {
 		this.limitOfIndemnity = limitOfIndemnity;
 	}
 

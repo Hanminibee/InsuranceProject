@@ -2,6 +2,7 @@ package service;
 
 import java.util.Scanner;
 
+import entity.InsuranceProducts;
 import entity.Manager;
 import list.ManagerListImpl;
 import type.ManagerType;
@@ -15,6 +16,12 @@ public class ManagerServiceImpl implements ManagerService{
 		this.sc = new Scanner(System.in);
 		this.managerListImpl = new ManagerListImpl();
 		
+		//test insuranceProduct
+		InsuranceProducts testIP = new InsuranceProducts();
+		testIP.setId("qwe");
+		testIP.setPassword("qwe");
+		testIP.setJobPosition(ManagerType.IP);
+		managerListImpl.add(testIP);
 	}
 	
 	public void association() {

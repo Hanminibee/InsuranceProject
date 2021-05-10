@@ -6,6 +6,7 @@ import entity.Client;
 import list.ClientListImpl;
 
 public class ClientServiceImpl implements ClientService {
+	
 	private ClientListImpl clientListImpl;
 	private Scanner sc;
 
