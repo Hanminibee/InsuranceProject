@@ -155,7 +155,7 @@ public class ConsoleController{
 			System.out.println("2.로그아웃");
 			switch(sc.nextInt()) {
 			case 1:
-				
+				uw.underwriteClient(insuranceProductService.selectNotApproval());;
 				break;
 			case 2:
 				managerLogin = null;

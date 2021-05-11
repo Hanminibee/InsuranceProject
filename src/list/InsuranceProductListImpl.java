@@ -25,7 +25,10 @@ public class InsuranceProductListImpl implements InsuranceProductList {
 		return insuranceProductList.remove(insuranceProduct);
 	}
 
-	public InsuranceProduct search(InsuranceProduct insuranceProduct) {
+	public InsuranceProduct search(String productName) {
+		for(InsuranceProduct insuranceProduct : insuranceProductList)
+			if(productName.equals(insuranceProduct.getProductName()))
+				return insuranceProduct;
 		return null;
 	}
 

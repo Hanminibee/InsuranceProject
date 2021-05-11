@@ -8,6 +8,6 @@ public interface InsuranceProductList {
 
 	public boolean delete(InsuranceProduct insuranceProduct);
 
-	public InsuranceProduct search(InsuranceProduct insuranceProduct);
+	public InsuranceProduct search(String productName);
 
 }
