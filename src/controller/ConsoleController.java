@@ -1,7 +1,11 @@
 package controller;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import entity.Client;
+import entity.CompensationHandle;
+import entity.Contract;
+import entity.ContractManagement;
 import entity.InsuranceProduct;
 import entity.InsuranceProducts;
 import entity.InsuranceProductsAcceptance;
@@ -110,7 +114,7 @@ public class ConsoleController{
 	}
 	
 	private void insuranceProductsMenu() {
-		InsuranceProducts ip = (InsuranceProducts)managerLogin;
+		InsuranceProducts insuranceProducts = (InsuranceProducts)managerLogin;
 		while(true) {
 			System.out.println("\n---InsuranceProductsMenu---");
 			System.out.println("1.보험상품 설계");
@@ -118,7 +122,7 @@ public class ConsoleController{
 			System.out.println("3.로그아웃");
 			switch(sc.nextInt()) {
 			case 1:
-				InsuranceProduct developedProduct = ip.designInsurance().developInsurance();
+				InsuranceProduct developedProduct = insuranceProducts.designInsurance().developInsurance();
 				insuranceProductService.add(developedProduct);
 				break;
 			case 2:
@@ -132,7 +136,7 @@ public class ConsoleController{
 	}
 	
 	private void insuranceProductsAcceptanceMenu() {
-		InsuranceProductsAcceptance ipa = (InsuranceProductsAcceptance)managerLogin;
+		InsuranceProductsAcceptance insuranceProductsAcceptance = (InsuranceProductsAcceptance)managerLogin;
 		while(true) {
 			System.out.println("\n---InsuranceProductsAcceptanceMenu---");
 			System.out.println("1.보험상품 승인");
@@ -155,7 +159,7 @@ public class ConsoleController{
 			System.out.println("2.로그아웃");
 			switch(sc.nextInt()) {
 			case 1:
-				uw.underwriteClient(insuranceProductService.selectNotApproval());;
+				this.underwriteClient(this.selectUnderWriteContract());
 				break;
 			case 2:
 				managerLogin = null;
@@ -164,12 +168,69 @@ public class ConsoleController{
 		}
 	}
 	
-	private void contractManagerMenu() {
+	private Contract selectUnderWriteContract() {
+		ArrayList<Contract> contractList = insuranceProductService.selectNotApproval();
+		if(contractList.size()>0) {
+			System.out.println("[인수심사 계약 목록]");
+			for(int i = 0; i < contractList.size(); i++)
+				System.out.println(String.format("%d.%5s%10s", i+1, contractList.get(i).getClientID(), contractList.get(i).getProductName()));
+			System.out.println("인수심사할 계약의 번호를 입력해주세요.");
+			int input = sc.nextInt();
+			Contract contract = contractList.get(input-1);
+			this.showClientInfo(contract.getClientID());
+//			this.showInsuranceInfo(contract.getProductName());
+			return contract;
+			
+		}else {
+			System.out.println("현재 심사할 계약이 없습니다.");
+			return null;
+		}
 		
 	}
 	
+	private void showClientInfo(String clientID) {
+		Client client = clientService.search(clientID);
+		System.out.println("[고객 정보]");
+		System.out.println("이름: " + client.getName());
+		System.out.println("나이: " + client.getAge());
+		System.out.println("성별: " + (client.isGender()? "남자" : "여자"));
+		System.out.println("직업: " + client.getJob().getJobName());
+		System.out.println("암경력: " + client.getMedicalHistory().getClientCancerCareer().getCancerName() + "(본인)"
+							+ client.getMedicalHistory().getFamilyCancerCareer().getCancerName() + "(가족)");
+		System.out.println("입원내역: " + client.getMedicalHistory().getNumberOfHospitalizations());
+		System.out.println("병원진료: " + client.getMedicalHistory().getNumberOfHospitalVisits());
+	}
+	
+	private void underwriteClient(Contract contract){
+		if(contract != null) {
+			System.out.println("해당 계약을 승인하시겠습니까? (1. 승인하기, 2. 승인거절)");
+			switch(sc.nextInt()) {
+			case 1:
+				contract.setApproval(true);
+				System.out.println("승인이 완료되었습니다.");
+				break;
+			case 2:
+				System.out.println("승인을 거절하였습니다.");
+				break;
+			}
+		}
+	}
+	
+	private void contractManagerMenu() {
+		ContractManagement contractManagement = (ContractManagement)managerLogin;
+		while(true) {
+			System.out.println("\n---ContractManagementMenu---");
+			System.out.println("");
+		}
+	}
+	
 	private void compensationHandleMenu() {
-		
+		CompensationHandle compensationHandle = (CompensationHandle)managerLogin;
+		while(true) {
+			System.out.println("\n---CompensationHandleMenu---");
+			System.out.println("1.사고처리");
+			System.out.println("2.로그아웃");
+		}
 	}
 	
 	private void salesPersonMenu() {

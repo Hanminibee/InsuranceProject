@@ -41,13 +41,8 @@ public class ContractListImpl implements ContractList{
 		return returnList;
 	}
 	
-	public ArrayList<Contract> searchByApproval(boolean approval){
-		ArrayList<Contract> returnList = new ArrayList<Contract>();
-		for(Contract contract : contractList) {
-			if(contract.isApproval() == approval)
-				returnList.add(contract);
-		}
-		return returnList;
+	public ArrayList<Contract> getContractList(){
+		return this.contractList;
 	}
 	
 }

@@ -19,6 +19,10 @@ public class ClientServiceImpl implements ClientService {
 	public void association() {
 		
 	}
+	
+	public Client search(String clientID) {
+		return clientListImpl.search(clientID);
+	}
 
 	@Override
 	public boolean register() {
@@ -97,5 +101,9 @@ public class ClientServiceImpl implements ClientService {
 			System.out.println("입력한 정보를 다시 확인해주세요.");
 		}
 		return false;
+	}
+	
+	public ClientListImpl getClientList() {
+		return this.clientListImpl;
 	}
 }
