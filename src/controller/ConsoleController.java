@@ -2,6 +2,7 @@ package controller;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import entity.Accident;
 import entity.Client;
 import entity.CompensationHandle;
 import entity.Contract;
@@ -14,6 +15,7 @@ import entity.UW;
 import service.ClientServiceImpl;
 import service.InsuranceProductServiceImpl;
 import service.ManagerServiceImpl;
+import type.InsuranceProductType;
 
 public class ConsoleController{
 	
@@ -30,8 +32,10 @@ public class ConsoleController{
 		this.insuranceProductService = new InsuranceProductServiceImpl();
 		this.managerService = new ManagerServiceImpl();
 		
+		this.clientService.association(insuranceProductService.getInsuranceProductList());
+		
 		this.managerLogin = null;
-		this.clientLogin = null;
+		this.clientLogin = null;  
 	}
 	
 	public void run() {
@@ -217,7 +221,7 @@ public class ConsoleController{
 	}
 	
 	private void contractManagerMenu() {
-		ContractManagement contractManagement = (ContractManagement)managerLogin;
+		//ContractManagement contractManagement = (ContractManagement)managerLogin;
 		while(true) {
 			System.out.println("\n---ContractManagementMenu---");
 			System.out.println("");
@@ -225,12 +229,46 @@ public class ConsoleController{
 	}
 	
 	private void compensationHandleMenu() {
-		CompensationHandle compensationHandle = (CompensationHandle)managerLogin;
+		//CompensationHandle compensationHandle = (CompensationHandle)managerLogin;
 		while(true) {
 			System.out.println("\n---CompensationHandleMenu---");
 			System.out.println("1.사고처리");
 			System.out.println("2.로그아웃");
+			switch(sc.nextInt()) {
+			case 1:
+				this.accidentHandlingMenu();
+				break;
+			case 2:
+				managerLogin = null;
+				break;
+			}
 		}
+	}
+	
+	private void accidentHandlingMenu() {
+		System.out.println("보고싶은 사고의 보험종류를 선택해주세요.");
+		System.out.println("[1.실비보험, 2.암보험, 3.연금보험, 4.종신보험]");
+		int input = sc.nextInt();
+		ArrayList<Accident> accidentList = clientService.showAccidentListByProductType(InsuranceProductType.values()[input-1]);		
+		System.out.println("[사고 목록]");
+		int i = 0;
+		for(Accident accident : accidentList) {
+			Client client = clientService.search(accident.getClientID());
+			System.out.println(String.format("%d.%5s%10s%12s", i+1, client.getName(), accident.getProductName(), accident.getReceptionDate().toString()));
+			i++;
+		}
+		System.out.println("상세정보를 보고 싶은 사고의 번호를 입력해주세요.");
+		input = sc.nextInt();
+		this.showAccidentDetail(accidentList.get(input-1));
+	}
+	
+	private void showAccidentDetail(Accident accident) {
+		Client client = clientService.search(accident.getClientID());
+		System.out.println("[상세정보]");
+		System.out.println("고객 이름: " + client.getName());
+		System.out.println("고객 나이: " + client.getAge());
+		System.out.println("접수 내용: " + accident.getAccidentDetail());
+		System.out.println("접수 날짜:" + accident.getReceptionDate());
 	}
 	
 	private void salesPersonMenu() {

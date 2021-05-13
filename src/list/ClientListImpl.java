@@ -7,8 +7,8 @@ import entity.Client;
 
 public class ClientListImpl implements ClientList {
 
-	Scanner sc = new Scanner(System.in);
-	ArrayList<Client> clientList = new ArrayList<Client>();
+	private Scanner sc = new Scanner(System.in);
+	private ArrayList<Client> clientList = new ArrayList<Client>();
 
 	public ArrayList<Client> getClientList() {
 		return this.clientList;

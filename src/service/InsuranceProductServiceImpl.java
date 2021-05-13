@@ -44,5 +44,9 @@ public class InsuranceProductServiceImpl implements InsuranceProductService{
 		}
 		return list;
 	}
+	
+	public InsuranceProductListImpl getInsuranceProductList() {
+		return this.insuranceProductListImpl;
+	}
 
 }

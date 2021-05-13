@@ -3,6 +3,7 @@ package list;
 import java.util.ArrayList;
 
 import entity.InsuranceProduct;
+import type.InsuranceProductType;
 
 public class InsuranceProductListImpl implements InsuranceProductList {
 
