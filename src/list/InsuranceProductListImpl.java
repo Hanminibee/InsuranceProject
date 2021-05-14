@@ -3,7 +3,6 @@ package list;
 import java.util.ArrayList;
 
 import entity.InsuranceProduct;
-import type.InsuranceProductType;
 
 public class InsuranceProductListImpl implements InsuranceProductList {
 
@@ -31,6 +30,15 @@ public class InsuranceProductListImpl implements InsuranceProductList {
 			if(productName.equals(insuranceProduct.getProductName()))
 				return insuranceProduct;
 		return null;
+	}
+	
+	public ArrayList<InsuranceProduct> searchListByApproval(boolean approval) {
+		ArrayList<InsuranceProduct> returnList = new ArrayList<InsuranceProduct>();
+		for(InsuranceProduct insuranceProduct : insuranceProductList) {
+			if(insuranceProduct.isApproval() == approval)
+				returnList.add(insuranceProduct);
+		}
+		return returnList;
 	}
 
 }

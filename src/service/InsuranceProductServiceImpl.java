@@ -48,5 +48,9 @@ public class InsuranceProductServiceImpl implements InsuranceProductService{
 	public InsuranceProductListImpl getInsuranceProductList() {
 		return this.insuranceProductListImpl;
 	}
+	
+	public ArrayList<InsuranceProduct> showInsuranceProductIsApproval(){
+		return insuranceProductListImpl.searchListByApproval(true);
+	}
 
 }

@@ -229,14 +229,14 @@ public class ConsoleController{
 	}
 	
 	private void compensationHandleMenu() {
-		//CompensationHandle compensationHandle = (CompensationHandle)managerLogin;
+		CompensationHandle compensationHandle = (CompensationHandle)managerLogin;
 		while(true) {
 			System.out.println("\n---CompensationHandleMenu---");
 			System.out.println("1.사고처리");
 			System.out.println("2.로그아웃");
 			switch(sc.nextInt()) {
 			case 1:
-				this.accidentHandlingMenu();
+				this.accidentHandlingMenu(compensationHandle);
 				break;
 			case 2:
 				managerLogin = null;
@@ -245,34 +245,65 @@ public class ConsoleController{
 		}
 	}
 	
-	private void accidentHandlingMenu() {
-		System.out.println("보고싶은 사고의 보험종류를 선택해주세요.");
-		System.out.println("[1.실비보험, 2.암보험, 3.연금보험, 4.종신보험]");
-		int input = sc.nextInt();
-		ArrayList<Accident> accidentList = clientService.showAccidentListByProductType(InsuranceProductType.values()[input-1]);		
-		System.out.println("[사고 목록]");
-		int i = 0;
-		for(Accident accident : accidentList) {
-			Client client = clientService.search(accident.getClientID());
-			System.out.println(String.format("%d.%5s%10s%12s", i+1, client.getName(), accident.getProductName(), accident.getReceptionDate().toString()));
-			i++;
+	private void accidentHandlingMenu(CompensationHandle compensationHandle) {
+		while(true) {
+			System.out.println("보고싶은 사고의 보험종류를 선택해주세요.");
+			System.out.println("[1.실비보험, 2.암보험, 3.연금보험, 4.종신보험, 5.돌아가기]");
+			int input = sc.nextInt();
+			if(input == 5) return; 
+			ArrayList<Accident> accidentList = clientService.showAccidentListByProductType(InsuranceProductType.values()[input-1]);		
+			System.out.println("[사고 목록]");
+			int i = 0;
+			for(Accident accident : accidentList) {
+				Client client = clientService.search(accident.getClientID());
+				System.out.println(String.format("%d.%5s%10s%12s", i+1, client.getName(), accident.getProductName(), accident.getReceptionDate().toString()));
+				i++;
+			}
+			System.out.println("상세정보를 보고 싶은 사고의 번호를 입력해주세요.");
+			input = sc.nextInt();
+			this.showAccidentDetail(compensationHandle, accidentList.get(input-1));
 		}
-		System.out.println("상세정보를 보고 싶은 사고의 번호를 입력해주세요.");
-		input = sc.nextInt();
-		this.showAccidentDetail(accidentList.get(input-1));
 	}
 	
-	private void showAccidentDetail(Accident accident) {
+	private void showAccidentDetail(CompensationHandle compensationHandle, Accident accident) {
 		Client client = clientService.search(accident.getClientID());
 		System.out.println("[상세정보]");
 		System.out.println("고객 이름: " + client.getName());
 		System.out.println("고객 나이: " + client.getAge());
 		System.out.println("접수 내용: " + accident.getAccidentDetail());
 		System.out.println("접수 날짜:" + accident.getReceptionDate());
+		
+		System.out.println("\n1.보험금 입력");
+		System.out.println("2.돌아가기");
+		switch(sc.nextInt()) {
+			case 1:
+				System.out.println("보험금을 입력해주세요.");
+				System.out.println(compensationHandle.PayInsuranceMoney(sc.nextInt(), client)? "보험금 지급이 완료되었습니다." : "보험금 지급에 실패하였습니다.");
+				break;
+			case 2:
+				return;
+		}
 	}
 	
 	private void salesPersonMenu() {
-		
+		while(true) {
+			System.out.println("\n---CompensationHandleMenu---");
+			System.out.println("1.영업 활동 관리");
+			System.out.println("2.모든 보험 조회");
+			System.out.println("4.로그아웃");
+			switch(sc.nextInt()) {
+			case 1:
+				this.insuranceProductsMenu();
+				break;
+			case 2:
+				this.insuranceProductsMenu();
+				
+				break;
+			case 3:
+				managerLogin = null;
+				break;
+			}
+		}
 	}
 	
 	
@@ -319,9 +350,21 @@ public class ConsoleController{
 	private void insuranceMenu() {
 		System.out.println("\n---InsuranceList---");
 		int i = 1;
-		for(InsuranceProduct insuranceProduct : insuranceProductService.showAllList()) {
+		for(InsuranceProduct insuranceProduct : insuranceProductService.showInsuranceProductIsApproval()) {
 			System.out.println(i+". " + insuranceProduct.getProductName() +" "+ insuranceProduct.getInsuranceProductType().getInsuranceName());
 			i++;
+		}
+		int input = sc.nextInt();
+	}
+	
+	private void showInsuranceProductDetail(InsuranceProduct insuranceProduct) {
+		System.out.println("보험상품 이름: " + insuranceProduct.getProductName());
+		System.out.println("기본보험료: " + insuranceProduct.getBasicInsurancePremium());
+		System.out.println("보험 종류: " + insuranceProduct.getInsuranceProductType().getInsuranceName());
+		System.out.println("납입기간: " + insuranceProduct.getPaymentPeriod());
+		System.out.println("납입주기: " + insuranceProduct.getPaymentCycle());
+		switch(insuranceProduct.getInsuranceProductType()) {
+		
 		}
 	}
 
