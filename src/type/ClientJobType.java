@@ -2,7 +2,7 @@ package type;
 
 public enum ClientJobType {
 	
-	SOLDIER("êµ°ì¸", 1.3), PW("ìƒì‚°ì§", 1.5), AF("ë†ë¦½ì–´ì—…", 1.6), DRIVER("ìš´ì „ê¸°ì‚¬", 1.2), ETC("ê¸°íƒ€", 1.0);
+	SOLDIER("±ºÀÎ", 1.3), PW("»ı»êÁ÷", 1.5), AF("³ó¸³¾î¾÷", 1.6), DRIVER("¿îÀü±â»ç", 1.2), ETC("±âÅ¸", 1.0);
 	
 	private String jobName;
 	private double rate;

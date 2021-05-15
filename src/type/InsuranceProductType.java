@@ -4,11 +4,12 @@ import entity.*;
 
 
 public enum InsuranceProductType {
-	ACTUALEXPENSE("ì‹¤ë¹„ë³´í—˜", new ActualExpense()), CANCER("ì•”ë³´í—˜", new Cancer()), 
-	PENSION("ì—°ê¸ˆë³´í—˜", new Pension()), LIFE("ì¢…ì‹ ë³´í—˜",new Life());
+	ACTUALEXPENSE("½Çºñº¸Çè", new ActualExpense()), CANCER("¾Ïº¸Çè", new Cancer()), 
+	PENSION("¿¬±Ýº¸Çè", new Pension()), LIFE("Á¾½Åº¸Çè",new Life());
 
 	private String insuranceName;
 	private InsuranceProduct insuranceProduct;
+	private Contract contract;
 
 	InsuranceProductType(String insuranceName, InsuranceProduct insuranceProduct) {
 		this.insuranceName = insuranceName;
@@ -21,5 +22,8 @@ public enum InsuranceProductType {
 	
 	public InsuranceProduct getInsuranceProduct() {
 		return this.insuranceProduct;
+	}
+	public Contract getContract() {
+		return this.contract;
 	}
 }

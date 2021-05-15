@@ -1,4 +1,8 @@
 package entity;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Cancer extends InsuranceProduct {
 
 	private String cancerList;
@@ -52,5 +56,27 @@ public class Cancer extends InsuranceProduct {
 		double familyCancerCareerRate = client.getMedicalHistory().getFamilyCancerCareer().getRate();
 		return clientCancerCareerRate*familyCancerCareerRate*basicInsurancePremium;
 	}
+
+	public void setClidnetId(String nextLine) {
+		
+	}
+
+	public void setInsuranceContractDate(String nextLine) {
+		DateTimeFormatter dob_format=DateTimeFormatter.ofPattern("dd-MM-uuuu");
+		LocalDate dob = LocalDate.parse(nextLine,dob_format);
+		System.out.println(dob);
+	}
+
+	public void setInsuranceExpiryDate(String nextLine) {
+		DateTimeFormatter dob_format=DateTimeFormatter.ofPattern("dd-MM-uuuu");
+		LocalDate dob = LocalDate.parse(nextLine,dob_format);
+		System.out.println(dob);
+	}
+
+	public void setNameOfSalesPerson(String nextLine) {
+		
+	}
+
+
 
 }

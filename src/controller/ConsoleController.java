@@ -35,10 +35,10 @@ public class ConsoleController{
 	private void mainMenu() {
 		while(true) {
 			System.out.println("\n---MainMenu---");
-			System.out.println("1.ê´€ë¦¬ì");
-			System.out.println("2.íšŒì›");
-			System.out.println("3.ë³´í—˜");
-			System.out.println("4.ëë‚´ê¸°");
+			System.out.println("1.°ü¸®ÀÚ");
+			System.out.println("2.È¸¿ø");
+			System.out.println("3.º¸Çè");
+			System.out.println("4.³¡³»±â");
 			switch(sc.nextInt()) {
 			case 1:
 				managerMenu();
@@ -59,26 +59,26 @@ public class ConsoleController{
 	private void managerMenu() {
 		while(true) {
 			System.out.println("\n---ManagerMenu---");
-			System.out.println("1.ê´€ë¦¬ì ë“±ë¡");
-			System.out.println("2.ê´€ë¦¬ì ë¡œê·¸ì¸");
-			System.out.println("3.ê´€ë¦¬ì ì‚­ì œ");
-			System.out.println("4.ëŒì•„ê°€ê¸°");
+			System.out.println("1.°ü¸®ÀÚ µî·Ï");
+			System.out.println("2.°ü¸®ÀÚ ·Î±×ÀÎ");
+			System.out.println("3.°ü¸®ÀÚ »èÁ¦");
+			System.out.println("4.µ¹¾Æ°¡±â");
 			switch(sc.nextInt()) {
 			case 1:
-				System.out.println(managerService.register() ? "ë“±ë¡ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤." : "ë“±ë¡ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.");
+				System.out.println(managerService.register() ? "µî·ÏÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù." : "µî·Ï¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.");
 				break;
 			case 2:
 				if(managerLogin == null) managerLogin = managerService.login();
 				if(managerLogin != null) managerWorkMenu();
-				else System.out.println("ë“±ë¡ë˜ì§€ ì•Šì€ ë§¤ë‹ˆì €ì…ë‹ˆë‹¤.");
+				else System.out.println("¾ø´Â ¸Å´ÏÀúÀÔ´Ï´Ù.");
 				break;
 			case 3:
-				System.out.println(managerService.delete() ? "ì‚­ì œê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤." : "ì‚­ì œì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.");
+				System.out.println(managerService.delete() ? "»èÁ¦°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù." : "»èÁ¦¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.");
 				break;
 			case 4:
 				return;
 			default: 
-				System.out.println("ì˜ëª»ëœ ê°’ì„ ì…ë ¥í•˜ì…¨ìŠµë‹ˆë‹¤.");
+				System.out.println("Àß¸øµÈ °ªÀ» ÀÔ·ÂÇÏ¼Ì½À´Ï´Ù.");
 				break;
 			}
 		}
@@ -96,8 +96,9 @@ public class ConsoleController{
 			
 			break;
 		case CM:
-			
+			contractManagementMenu();
 			break;
+			
 		case CH:
 			
 			break;
@@ -111,9 +112,10 @@ public class ConsoleController{
 		InsuranceProducts ip = (InsuranceProducts)managerLogin;
 		while(true) {
 			System.out.println("\n---InsuranceProductsMenu---");
-			System.out.println("1.ë³´í—˜ìƒí’ˆ ì„¤ê³„");
-			System.out.println("2.ì‚¬í›„ê´€ë¦¬");
-			System.out.println("3.ë¡œê·¸ì•„ì›ƒ");
+			System.out.println("1.º¸Çè»óÇ° ¼³°è");
+			System.out.println("2.»çÈÄ°ü¸®");
+			System.out.println("3.°è¾à°ü¸®");
+			System.out.println("3.·Î±×¾Æ¿ô");
 			switch(sc.nextInt()) {
 			case 1:
 				InsuranceProduct developedProduct = ip.designInsurance().developInsurance();
@@ -122,8 +124,23 @@ public class ConsoleController{
 			case 2:
 				break;
 			case 3:
+				break;
+			case 4:
 				managerLogin = null;
 				return;
+			}
+		}
+	}
+	private void contractManagementMenu() {
+		ContractManagement cm = (ContractManagement)managerLogin;
+		while(true) {
+			System.out.println("\n---ContractManagementMenu");
+			System.out.println("1.°è¾àÇÑ º¸Çè °ü¸®");
+			System.out.println("2.¸¸·áµÈ º¸Çè°è¾à °ü¸®");
+			System.out.println("3.·Î±×¾Æ¿ô");
+			switch(sc.nextInt()) {
+			case 1:
+				Contract c
 			}
 		}
 	}
@@ -132,18 +149,16 @@ public class ConsoleController{
 	private void clientMenu() {
 		while(true) {
 			System.out.println("\n---ClientMenu---");
-			System.out.println("1.íšŒì›ê°€ì…");
-			System.out.println("2.íšŒì› ë¡œê·¸ì¸");
-			System.out.println("3.íšŒì› íƒˆí‡´");
-			System.out.println("4.ëŒì•„ê°€ê¸°");
+			System.out.println("1.È¸¿ø°¡ÀÔ");
+			System.out.println("2.È¸¿ø ·Î±×ÀÎ");
+			System.out.println("3.È¸¿ø Å»Åğ");
+			System.out.println("4.µ¹¾Æ°¡±â");
 			switch(sc.nextInt()) {
 			case 1:
 				clientService.register();
 				break;
 			case 2:
 				if(clientLogin == null) clientLogin = clientService.login();
-				if(clientLogin != null) clientWorkMenu();
-				else System.out.println("ì…ë ¥í•œ ì •ë³´ê°€ ì˜ëª»ë˜ì—ˆìŠµë‹ˆë‹¤.");
 				break;
 			case 3:
 				clientService.delete();
@@ -151,18 +166,6 @@ public class ConsoleController{
 			case 4:
 				return;
 			}
-		}
-	}
-	
-	private void clientWorkMenu() {
-		System.out.println("1.ëª¨ë“  ë³´í—˜ ì¡°íšŒí•˜ê¸° 2.ê°€ì…í•œ ë³´í—˜ ì¡°íšŒí•˜ê¸° 3.ë¡œê·¸ì•„ì›ƒ");
-		switch(sc.nextInt()) {
-		case 1: 
-			 insuranceMenu();
-		case 2: 
-			
-		case 3: clientLogin = null;
-			return;
 		}
 	}
 	
@@ -174,6 +177,13 @@ public class ConsoleController{
 			System.out.println(i+". " + insuranceProduct.getProductName() +" "+ insuranceProduct.getInsuranceProductType().getInsuranceName());
 			i++;
 		}
+	//contractMenu
+	private void contractMenu() {
+		System.out.println("\n---ContractList---");
+		int i = 1;
+		for()
 	}
+	}
+	
 
 }

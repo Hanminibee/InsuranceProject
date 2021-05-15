@@ -20,11 +20,11 @@ public class InsuranceProductServiceImpl implements InsuranceProductService{
 	public void designInsuranceProduct(InsuranceProducts insuranceProducts) {
 		InsuranceProduct developedProduct = insuranceProducts.designInsurance().developInsurance();
 		System.out.println(insuranceProductListImpl.add(developedProduct)? 
-				"ë³´í—˜ìƒí’ˆ ìƒì„±ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.":"ë³´í—˜ìƒí’ˆ ìƒì„±ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.");
+				"º¸Çè»óÇ° »ı¼ºÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.":"º¸Çè»óÇ° »ı¼º¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.");
 	}
 	
 	public void add(InsuranceProduct developedProduct) {
 		System.out.println(insuranceProductListImpl.add(developedProduct)? 
-				"ë³´í—˜ìƒí’ˆ ìƒì„±ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.":"ë³´í—˜ìƒí’ˆ ìƒì„±ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.");
+				"º¸Çè»óÇ° »ı¼ºÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.":"º¸Çè»óÇ° »ı¼º¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.");
 	}
 }

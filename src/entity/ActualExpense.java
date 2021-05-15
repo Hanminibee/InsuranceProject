@@ -1,4 +1,8 @@
 package entity;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class ActualExpense extends InsuranceProduct{
 
 	private String guaranteedType;
@@ -59,5 +63,30 @@ public class ActualExpense extends InsuranceProduct{
 	public double calculationRate(Client client) {
 		return (client.getJob().getRate())*basicInsurancePremium;
 	}
+
+	public void setClidnetId(String nextLine) {
+		
+	}
+
+	public void setInsuranceContractDate(String nextLine) {
+		DateTimeFormatter dob_format=DateTimeFormatter.ofPattern("dd-MM-uuuu");
+		LocalDate dob = LocalDate.parse(nextLine,dob_format);
+		System.out.println(dob);
+		
+	}
+
+	public void setInsuranceExpiryDate(String nextLine) {
+		DateTimeFormatter dob_format=DateTimeFormatter.ofPattern("dd-MM-uuuu");
+		LocalDate dob = LocalDate.parse(nextLine,dob_format);
+		System.out.println(dob);
+	}
+
+	public void setNameOfSalesPerson(String nextLine) {
+		
+	}
+
+
+
+
 
 }

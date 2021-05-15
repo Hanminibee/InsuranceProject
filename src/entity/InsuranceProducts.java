@@ -11,11 +11,11 @@ public class InsuranceProducts extends Manager{
 	}
 
 	public InsuranceProducts designInsurance() {
-		System.out.println("ê°œë°œí•  ë³´í—˜ì„ ì„ íƒí•´ì£¼ì„¸ìš”.");
-		System.out.println("1.ì‹¤ë¹„ë³´í—˜");
-		System.out.println("2.ì•”ë³´í—˜");
-		System.out.println("3.ì—°ê¸ˆë³´í—˜");
-		System.out.println("4.ì¢…ì‹ ë³´í—˜");
+		System.out.println("°³¹ßÇÒ º¸ÇèÀ» ¼±ÅÃÇØÁÖ¼¼¿ä.");
+		System.out.println("1.½Çºñº¸Çè");
+		System.out.println("2.¾Ïº¸Çè");
+		System.out.println("3.¿¬±İº¸Çè");
+		System.out.println("4.Á¾½Åº¸Çè");
 		int input = sc.nextInt();
 		sc.nextLine();
 		this.developInsuranceProduct = InsuranceProductType.values()[input-1].getInsuranceProduct().clone();
@@ -40,19 +40,19 @@ public class InsuranceProducts extends Manager{
 	
 	private ActualExpense developActualExpense() {
 		ActualExpense actualExpense = (ActualExpense)developInsuranceProduct;
-		System.out.println("ìƒí’ˆëª…ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.");
+		System.out.println("»óÇ°¸íÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä.");
 		actualExpense.setProductName(sc.nextLine());
 		
-		System.out.println("ë‚©ì…ê¸°ê°„ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.(ë‹¨ìœ„: ë…„)");
+		System.out.println("³³ÀÔ±â°£À» ÀÔ·ÂÇØÁÖ¼¼¿ä.(´ÜÀ§: ³â)");
 		actualExpense.setPaymentPeriod(sc.nextInt());
 		
-		System.out.println("ë‚©ì…ì£¼ê¸°ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.(ë‹¨ìœ„: ë§¤ì›” xì¼)");
+		System.out.println("³³ÀÔÁÖ±â¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.(´ÜÀ§: ¸Å¿ù xÀÏ)");
 		actualExpense.setPaymentCycle(sc.nextInt());
 		
-		System.out.println("ì œí•œë‚˜ì´ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”. (ë‹¨ìœ„: ë§Œ xì„¸)");
+		System.out.println("Á¦ÇÑ³ªÀÌ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä. (´ÜÀ§: ¸¸ x¼¼)");
 		actualExpense.setLimitAge(sc.nextInt());
 		
-		System.out.println("ìê¸°ë¶€ë‹´ê¸ˆ ë¹„ìœ¨ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.(ë‹¨ìœ„: %)");
+		System.out.println("ÀÚ±âºÎ´ã±İ ºñÀ²À» ÀÔ·ÂÇØÁÖ¼¼¿ä.(´ÜÀ§: %)");
 		actualExpense.setSelfPayment(sc.nextInt());
 		
 		System.out.println();
@@ -68,22 +68,22 @@ public class InsuranceProducts extends Manager{
 	
 	private Pension developPension() {
 		Pension pension = (Pension)developInsuranceProduct;
-		System.out.println("ìƒí’ˆëª…ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.");
+		System.out.println("»óÇ°¸íÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä.");
 		pension.setProductName(sc.nextLine());
 		
-		System.out.println("ë‚©ì…ê¸°ê°„ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.(ë‹¨ìœ„: ë…„)");
+		System.out.println("³³ÀÔ±â°£À» ÀÔ·ÂÇØÁÖ¼¼¿ä.(´ÜÀ§: ³â)");
 		pension.setPaymentPeriod(sc.nextInt());
 		
-		System.out.println("ë‚©ì…ì£¼ê¸°ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.(ë‹¨ìœ„: ë§¤ì›” xì¼)");
+		System.out.println("³³ÀÔÁÖ±â¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.(´ÜÀ§: ¸Å¿ù xÀÏ)");
 		pension.setPaymentCycle(sc.nextInt());
 		
-		System.out.println("ê¸°ë³¸ë³´í—˜ë£Œë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”. (ë‹¨ìœ„: ì›)");
+		System.out.println("±âº»º¸Çè·á¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä. (´ÜÀ§: ¿ø)");
 		pension.setBasicInsurancePremium(sc.nextInt());
 		
-		System.out.println("ë³´ì¥ê¸°ê°„ ì…ë ¥í•´ì£¼ì„¸ìš”. (ë‹¨ìœ„: ë§Œ ë‚˜ì´)");
+		System.out.println("º¸Àå±â°£ ÀÔ·ÂÇØÁÖ¼¼¿ä. (´ÜÀ§: ¸¸ ³ªÀÌ)");
 		pension.setGuaranteedPeriod(sc.nextInt());
 		
-		System.out.println("ë³´ìƒê¸ˆì•¡ì„ ì…ë ¥í•´ì£¼ì„¸ìš”. (ë‹¨ìœ„: ë§¤ì›” xì›)");
+		System.out.println("º¸»ó±İ¾×À» ÀÔ·ÂÇØÁÖ¼¼¿ä. (´ÜÀ§: ¸Å¿ù x¿ø)");
 		pension.setInsuranceMoney(sc.nextInt());
 		
 		return pension;
@@ -91,22 +91,22 @@ public class InsuranceProducts extends Manager{
 	
 	private Life developLife() {
 		Life life = (Life)developInsuranceProduct;
-		System.out.println("ìƒí’ˆëª…ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.");
+		System.out.println("»óÇ°¸íÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä.");
 		life.setProductName(sc.nextLine());
 		
-		System.out.println("ë‚©ì…ê¸°ê°„ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.(ë‹¨ìœ„: ë…„)");
+		System.out.println("³³ÀÔ±â°£À» ÀÔ·ÂÇØÁÖ¼¼¿ä.(´ÜÀ§: ³â)");
 		life.setPaymentPeriod(sc.nextInt());
 		
-		System.out.println("ë‚©ì…ì£¼ê¸°ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.(ë‹¨ìœ„: ë§¤ì›” xì¼)");
+		System.out.println("ÇÊ¼ö ³³ÀÔ±â°£À» ÀÔ·ÂÇØÁÖ¼¼¿ä. (´ÜÀ§: ³â)");
 		life.setRequiredPaymentPeriod(sc.nextInt());
 		
-		System.out.println("ê¸°ë³¸ë³´í—˜ë£Œë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”. (ë‹¨ìœ„: ì›)");
+		System.out.println("³³ÀÔÁÖ±â¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.(´ÜÀ§: ¸Å¿ù xÀÏ)");
 		life.setPaymentCycle(sc.nextInt());
 		
-		System.out.println("ë³´ì¥ê¸°ê°„ ì…ë ¥í•´ì£¼ì„¸ìš”. (ë‹¨ìœ„: ë§Œ ë‚˜ì´)");
+		System.out.println("±âº»º¸Çè·á¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä. (´ÜÀ§: ¿ø)");
 		life.setBasicInsurancePremium(sc.nextInt());
 		
-		System.out.println("ë³´ìƒê¸ˆì•¡ì„ ì…ë ¥í•´ì£¼ì„¸ìš”. (ë‹¨ìœ„: ë§¤ì›” xì›)");
+		System.out.println("º¸»ó±İÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä. (´ÜÀ§: ¿ø)");
 		life.setInsuranceMoney(sc.nextInt());
 		
 		return life;
