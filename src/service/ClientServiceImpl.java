@@ -1,31 +1,19 @@
 package service;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
-import entity.Accident;
 import entity.Client;
-import list.AccidentListImpl;
 import list.ClientListImpl;
-import list.InsuranceProductListImpl;
-import type.InsuranceProductType;
 
 public class ClientServiceImpl implements ClientService {
 	
 	private ClientListImpl clientListImpl;
-	private AccidentListImpl accidentListImpl;
-	private InsuranceProductListImpl insuranceProductListImpl;
 	private Scanner sc;
 
 	
 	public ClientServiceImpl() {
 		this.clientListImpl = new ClientListImpl();
-		this.accidentListImpl = new AccidentListImpl();
 		this.sc = new Scanner(System.in);
-	}
-	
-	public void association(InsuranceProductListImpl insuranceProductListImpl) {
-		this.insuranceProductListImpl = insuranceProductListImpl;
 	}
 	
 	public Client search(String clientID) {
@@ -113,18 +101,6 @@ public class ClientServiceImpl implements ClientService {
 	
 	public ClientListImpl getClientList() {
 		return this.clientListImpl;
-	}
-	
-	//accident
-	public ArrayList<Accident> showAccidentListByProductType(InsuranceProductType insuranceProductType){
-		ArrayList<Accident> returnList = new ArrayList<Accident>();
-		String productName = "";
-		for(Accident accident : accidentListImpl.getAccidentList()) {
-			productName = accident.getProductName();
-			if(insuranceProductType == insuranceProductListImpl.search(productName).getInsuranceProductType())
-				returnList.add(accident);
-		}
-		return accidentListImpl.getAccidentList();
 	}
 	
 }

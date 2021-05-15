@@ -1,13 +1,11 @@
 package list;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import entity.Client;
 
 public class ClientListImpl implements ClientList {
 
-	private Scanner sc = new Scanner(System.in);
 	private ArrayList<Client> clientList = new ArrayList<Client>();
 
 	public ArrayList<Client> getClientList() {
