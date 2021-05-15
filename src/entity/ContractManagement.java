@@ -123,52 +123,50 @@ public class ContractManagement extends Manager {
 		ActualExpense actualExpense = (ActualExpense)cancelContract;
 		System.out.println("보험을 해지하고자 하는 고객님의 아이디를 입력해 주세요.");
 		actualExpense.setClidnetId(sc.nextLine());
-		System.out.println("보험을 계약한 날짜를 입력하세요.");
-		actualExpense.setInsuranceContractDate(sc.nextLine());
-		System.out.println("계약한 보험의 만기 날짜를 입력하세요.");
-		actualExpense.setInsuranceExpiryDate(sc.nextLine());
-		System.out.println("보험을 계약한 영업사원의 이름을 입력하세요.");
+		System.out.println("보험을 해지한 영업사원의 이름을 입력하세요.");
 		actualExpense.setNameOfSalesPerson(sc.nextLine());
 		return actualExpense;
 	}
 
 	private Contract cancelContractCancer() {
-		ActualExpense actualExpense = (ActualExpense)cancelContract;
+		Cancer cancer = (Cancer)cancelContract;
 		System.out.println("보험을 해지하고자 하는 고객님의 아이디를 입력해 주세요.");
-		actualExpense.setClidnetId(sc.nextLine());
-		System.out.println("보험을 계약한 날짜를 입력하세요.");
-		actualExpense.setInsuranceContractDate(sc.nextLine());
-		System.out.println("계약한 보험의 만기 날짜를 입력하세요.");
-		actualExpense.setInsuranceExpiryDate(sc.nextLine());
-		System.out.println("보험을 계약한 영업사원의 이름을 입력하세요.");
-		actualExpense.setNameOfSalesPerson(sc.nextLine());
-		return actualExpense;
+		cancer.setClidnetId(sc.nextLine());
+		cancer.setInsuranceExpiryDate(sc.nextLine());
+		System.out.println("보험을 해지한 영업사원의 이름을 입력하세요.");
+		cancer.setNameOfSalesPerson(sc.nextLine());
+		return cancer;
 	}
 
 	private Contract cancelContractPension() {
-		ActualExpense actualExpense = (ActualExpense)cancelContract;
+		Pension pension = (Pension)cancelContract;
 		System.out.println("보험을 해지하고자 하는 고객님의 아이디를 입력해 주세요.");
-		actualExpense.setClidnetId(sc.nextLine());
-		System.out.println("보험을 계약한 날짜를 입력하세요.");
-		actualExpense.setInsuranceContractDate(sc.nextLine());
-		System.out.println("계약한 보험의 만기 날짜를 입력하세요.");
-		actualExpense.setInsuranceExpiryDate(sc.nextLine());
-		System.out.println("보험을 계약한 영업사원의 이름을 입력하세요.");
-		actualExpense.setNameOfSalesPerson(sc.nextLine());
-		return actualExpense;
+		pension.setClidnetId(sc.nextLine());
+		System.out.println("보험을 해지한 영업사원의 이름을 입력하세요.");
+		pension.setNameOfSalesPerson(sc.nextLine());
+		return pension;
 	}
 
 	private Contract cancelContractLife() {
-		ActualExpense actualExpense = (ActualExpense)cancelContract;
+		Life life = (Life)cancelContract;
 		System.out.println("보험을 해지하고자 하는 고객님의 아이디를 입력해 주세요.");
-		actualExpense.setClidnetId(sc.nextLine());
-		System.out.println("보험을 계약한 날짜를 입력하세요.");
-		actualExpense.setInsuranceContractDate(sc.nextLine());
-		System.out.println("계약한 보험의 만기 날짜를 입력하세요.");
-		actualExpense.setInsuranceExpiryDate(sc.nextLine());
-		System.out.println("보험을 계약한 영업사원의 이름을 입력하세요.");
-		actualExpense.setNameOfSalesPerson(sc.nextLine());
-		return actualExpense;
+		life.setClidnetId(sc.nextLine());
+		System.out.println("보험을 해지한 영업사원의 이름을 입력하세요.");
+		life.setNameOfSalesPerson(sc.nextLine());
+		return life;
+	}
+	
+	public ContractManagement provideInsuranceProducts() {
+		System.out.println("정보를 검색하고 싶은 보험을 선택하세요.");
+		System.out.println("1.실비보험");
+		System.out.println("2.암보험");
+		System.out.println("3.연금보험");
+		System.out.println("4.종신보험");
+		int input = sc.nextInt();
+		sc.nextLine();
+		this.searchContract = InsuranceProductType.values()[input-1].getContract().clone();
+		searchContract.setInsuranceProductType(InsuranceProductType.values()[input-1]);
+		return this;
 	}
 
 	public ContractManagement clone() {
