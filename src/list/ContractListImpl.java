@@ -25,8 +25,8 @@ public class ContractListImpl implements ContractList{
 
 	@Override
 	public Contract search(Contract contract) {
-		for (Contract contractName : contractList) {
-			if (contractName.equals(contract.ContractInsuranceProducts()))
+		for (Contract clientId : contractList) {
+			if (clientId.equals(contract.ContractInsuranceProducts()))
 				return contract;
 		}
 		return null;
