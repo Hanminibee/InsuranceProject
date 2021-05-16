@@ -205,7 +205,6 @@ public class ConsoleController{
 			this.showClientInfo(contract.getClientID());
 //			this.showInsuranceProductDetail(contract.getProductName());
 			return contract;
-			
 		}else {
 			System.out.println("현재 심사할 계약이 없습니다.");
 			return null;
@@ -256,7 +255,7 @@ public class ConsoleController{
 			System.out.println("보고싶은 사고의 보험종류를 선택해주세요.");
 			System.out.println("[1.실비보험, 2.암보험, 3.연금보험, 4.종신보험, 5.돌아가기]");
 			int input = sc.nextInt();
-			if(input == 5) return; 
+			if(input == 5) break; 
 			ArrayList<Accident> accidentList = contractService.showAccidentListByProductType(InsuranceProductType.values()[input-1]);		
 			System.out.println("[사고 목록]");
 			int i = 0;
@@ -284,7 +283,7 @@ public class ConsoleController{
 		switch(sc.nextInt()) {
 			case 1:
 				System.out.println("보험금을 입력해주세요.");
-				System.out.println(compensationHandle.PayInsuranceMoney(sc.nextInt(), client)? "보험금 지급이 완료되었습니다." : "보험금 지급에 실패하였습니다.");
+				System.out.println(compensationHandle.payInsuranceMoney(sc.nextInt(), client)? "보험금 지급이 완료되었습니다." : "보험금 지급에 실패하였습니다.");
 				break;
 			case 2:
 				return;
@@ -293,7 +292,7 @@ public class ConsoleController{
 	
 	private void salesPersonMenu() {
 		while(true) {
-			System.out.println("\n---CompensationHandleMenu---");
+			System.out.println("\n---salesPersonMenu---");
 			System.out.println("1.영업 활동 관리");
 			System.out.println("2.모든 보험 조회");
 			System.out.println("4.로그아웃");

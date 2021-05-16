@@ -18,7 +18,7 @@ public class CompensationHandle extends Manager {
 
 	}
 
-	public boolean PayInsuranceMoney(int insuranceMoney, Client client){
+	public boolean payInsuranceMoney(int insuranceMoney, Client client){
 		return this.remittance(client.getBankAccountNumber(), insuranceMoney);
 	}
 	
