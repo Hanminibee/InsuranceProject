@@ -1,9 +1,8 @@
 package controller;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import entity.Accident;
-import entity.ActualExpense;
-import entity.Cancer;
 import entity.Client;
 import entity.CompensationHandle;
 import entity.Contract;
@@ -149,7 +148,7 @@ public class ConsoleController {
 		}
 	}
 	private void insuranceProductsAcceptanceMenu(){//IPA(보험상품승인자)
-		InsuranceProductsAcceptance ipa = (InsuranceProductsAcceptance) managerLogin;
+//		InsuranceProductsAcceptance ipa = (InsuranceProductsAcceptance) managerLogin;
 		while (true) {
 			System.out.println("---InsuranceProductsAcceptanceMenu---");
 			System.out.println("1.승인할 보험 선택하기 2.승인된 보험 삭제 3.로그아웃");
@@ -194,7 +193,6 @@ public class ConsoleController {
 	
 	private void approvalInsuranceDelete() {//승인한보험삭제
 		System.out.println("--삭제할 보험을 선택해주세요.--");
-		int a = sc.nextInt();
 		
 		System.out.println("1.삭제하기 2.돌아가기");
 		switch(sc.nextInt()) {
@@ -253,9 +251,10 @@ public class ConsoleController {
 			return;
 		}
 	}
-	private void clientRegisterMenu() {
-		
-	}
+	
+//	private void clientRegisterMenu() {
+//		
+//	}
 	
 	private void underWriterMenu() {//UW(UW)
 //		UW uw = (UW)managerLogin;
@@ -441,15 +440,10 @@ public class ConsoleController {
 	}
 	
 	private void actualexpenseInfo() {
-		ActualExpense actualExpenseDetailInfo = new ActualExpense();
-		System.out.println("제한나이: " + actualExpenseDetailInfo.getLimitAge() + " 자기부담금: " + actualExpenseDetailInfo.getSelfPayment() + " 보장내역: " + actualExpenseDetailInfo.getActualExpenseType() 
-		+ " 보장금액: " + actualExpenseDetailInfo.getLimitOfIndemnity());
+	
 	}
 	
 	private void cancerInfo() {
-		Cancer cancerDetailInfo = new Cancer();
-		System.out.println("제한나이: " + cancerDetailInfo.getLimitAge() + " 보장내역: " + cancerDetailInfo.getCancerType().getCancerName() + cancerDetailInfo.getCancerType().getRate()
-				+ " 보험금: " + cancerDetailInfo.getInsuranceMoney());
 		
 	}
 	

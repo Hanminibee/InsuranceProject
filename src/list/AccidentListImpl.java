@@ -34,9 +34,4 @@ public class AccidentListImpl implements AccidentList{
 	public ArrayList<Accident> getAccidentList(){
 		return this.accidentList;
 	}
-
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> refs/heads/master
