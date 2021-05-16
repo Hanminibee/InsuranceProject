@@ -1,26 +1,21 @@
 package service;
-
 import java.util.Scanner;
-
 import entity.Client;
+import entity.Manager;
 import list.ClientListImpl;
-
+import type.ClientJobType;
+import type.ManagerType;
 public class ClientServiceImpl implements ClientService {
-	
 	private ClientListImpl clientListImpl;
 	private Scanner sc;
 
-	
 	public ClientServiceImpl() {
 		this.clientListImpl = new ClientListImpl();
 		this.sc = new Scanner(System.in);
 	}
-	
-	public Client search(String clientID) {
-		return clientListImpl.search(clientID);
+	public void association() {
+		
 	}
-
-	@Override
 	public boolean register() {
 		Client client = new Client();
 		
@@ -50,6 +45,17 @@ public class ClientServiceImpl implements ClientService {
 			System.out.println("여자");
 		}
 		
+		System.out.println("[ClientJobType]");
+		System.out.println("[1.군인 2.PW 3.AF 4.DRIVER 5.ETC]");
+		int input = sc.nextInt();
+		ClientJobType.values()[input-1].getJobName();
+		System.out.println(ClientJobType.values()[input-1].getJobName());
+		
+		sc.nextLine();
+		
+		//Manager manager = ManagerType.values()[input-1].getManager().clone();
+		//manager.setJobPosition(ManagerType.values()[input-1]);
+		
 		System.out.println("주소를 입력하세요.");
 		client.setAddress(sc.nextLine());
 		sc.nextLine();
@@ -67,18 +73,13 @@ public class ClientServiceImpl implements ClientService {
 		
 		return clientListImpl.add(client);
 	}
-
-	@Override
 	public Client login() {
 		System.out.println("--ID를 입력해주세요.--");
 		String id = sc.next();
 		System.out.println("--Password를 입력해주세요.--");
 		String pw = sc.next();
-		
 		return clientListImpl.search(id, pw);
 	}
-
-	@Override
 	public boolean delete() {
 		System.out.println("--삭제할 고객 ID를 입력해주세요.--");
 		String id = sc.next();
@@ -98,9 +99,8 @@ public class ClientServiceImpl implements ClientService {
 		}
 		return false;
 	}
-	
-	public ClientListImpl getClientList() {
-		return this.clientListImpl;
+	public Client search(String clientID) {
+		return clientListImpl.search(clientID);
 	}
-	
+
 }

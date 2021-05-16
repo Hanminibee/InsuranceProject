@@ -35,4 +35,8 @@ public class AccidentListImpl implements AccidentList{
 		return this.accidentList;
 	}
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> refs/heads/master

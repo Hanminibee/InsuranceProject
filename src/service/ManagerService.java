@@ -9,3 +9,4 @@ public interface ManagerService {
 	public boolean delete();
 	
 }
+

@@ -8,4 +8,8 @@ public interface ContractService {
 	
 	public ArrayList<Contract> selectNotApproval();
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> refs/heads/master

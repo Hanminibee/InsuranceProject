@@ -12,18 +12,18 @@ public class InsuranceProductServiceImpl implements InsuranceProductService{
 	public InsuranceProductServiceImpl(){
 		this.insuranceProductListImpl = new InsuranceProductListImpl();
 	}
-	
-	public void association() {
-		
-	}
 
 	public ArrayList<InsuranceProduct> showAllList() {
 		return insuranceProductListImpl.getInsuranceProductList();
 	}
+	
+	public ArrayList<InsuranceProduct> showInsuranceProductIsApproval(){
+		return insuranceProductListImpl.searchListByApproval(true);
+	}
 
 	public void designInsuranceProduct(InsuranceProducts insuranceProducts) {
 		InsuranceProduct developedProduct = insuranceProducts.designInsurance().developInsurance();
-		System.out.println(insuranceProductListImpl.add(developedProduct)?
+		System.out.println(insuranceProductListImpl.add(developedProduct)? 
 				"보험상품 생성이 완료되었습니다.":"보험상품 생성에 실패하였습니다.");
 	}
 	
@@ -35,9 +35,4 @@ public class InsuranceProductServiceImpl implements InsuranceProductService{
 	public InsuranceProductListImpl getInsuranceProductList() {
 		return this.insuranceProductListImpl;
 	}
-	
-	public ArrayList<InsuranceProduct> showInsuranceProductIsApproval(){
-		return insuranceProductListImpl.searchListByApproval(true);
-	}
-
 }

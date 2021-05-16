@@ -5,7 +5,7 @@ import type.ClientJobType;
 /**
  * @author hm539
  * @version 1.0
- * @created 28-4-2021 ¿ÀÈÄ 5:02:47
+ * @created 28-4-2021 ï¿½ï¿½ï¿½ï¿½ 5:02:47
  */
 public class Client {
 
