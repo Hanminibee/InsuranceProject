@@ -1,13 +1,22 @@
 package list;
 import java.util.ArrayList;
+
+import entity.ActualExpense;
 import entity.InsuranceProduct;
+import type.InsuranceProductType;
 public class InsuranceProductListImpl implements InsuranceProductList {
-	private ArrayList<InsuranceProduct> insuranceProductList;
 	
-	public InsuranceProduct m_InsuranceProduct;
+	private ArrayList<InsuranceProduct> insuranceProductList;
 	
 	public InsuranceProductListImpl() {
 		this.insuranceProductList = new ArrayList<InsuranceProduct>();
+		
+		//test insuranceProduct
+		ActualExpense ae = new ActualExpense();
+		ae.setProductName("테스트실비보험");
+		ae.setInsuranceProductType(InsuranceProductType.ACTUALEXPENSE);
+		ae.setApproval(true);
+		this.add(ae);
 	}
 	public ArrayList<InsuranceProduct> getInsuranceProductList() {
 		return this.insuranceProductList;

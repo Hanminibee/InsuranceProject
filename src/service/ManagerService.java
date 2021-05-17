@@ -4,9 +4,10 @@ import entity.Manager;
 
 public interface ManagerService {
 	
-	public boolean register();
-	public Manager login();
-	public boolean delete();
+	public void association();
+	public boolean register(Manager manager);
+	public Manager login(String id, String pw);
+	public boolean delete(String id, String pw);
 	
 }
 

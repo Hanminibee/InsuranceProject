@@ -9,5 +9,6 @@ public interface ContractList {
 	public boolean delete(Contract contract);
 	public Contract search(String clientID, String productName);
 	public ArrayList<Contract> searchByClient(String clientID);
+	public ArrayList<Contract> getContractList();
 }
 

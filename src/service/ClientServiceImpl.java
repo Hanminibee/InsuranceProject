@@ -1,16 +1,16 @@
 package service;
 import java.util.Scanner;
+
 import entity.Client;
-import entity.Manager;
+import list.ClientList;
 import list.ClientListImpl;
 import type.ClientJobType;
-import type.ManagerType;
 public class ClientServiceImpl implements ClientService {
-	private ClientListImpl clientListImpl;
+	private ClientList clientList;
 	private Scanner sc;
 
 	public ClientServiceImpl() {
-		this.clientListImpl = new ClientListImpl();
+		this.clientList = new ClientListImpl();
 		this.sc = new Scanner(System.in);
 	}
 	public void association() {
@@ -71,14 +71,14 @@ public class ClientServiceImpl implements ClientService {
 		
 		System.out.println("회원가입이 완료되었습니다.");
 		
-		return clientListImpl.add(client);
+		return clientList.add(client);
 	}
 	public Client login() {
 		System.out.println("--ID를 입력해주세요.--");
 		String id = sc.next();
 		System.out.println("--Password를 입력해주세요.--");
 		String pw = sc.next();
-		return clientListImpl.search(id, pw);
+		return clientList.search(id, pw);
 	}
 	public boolean delete() {
 		System.out.println("--삭제할 고객 ID를 입력해주세요.--");
@@ -86,11 +86,11 @@ public class ClientServiceImpl implements ClientService {
 		System.out.println("--삭제할 고객 PW를 입력해주세요.--");
 		String pw = sc.next();
 		
-		if(clientListImpl.search(id, pw) != null) {
+		if(clientList.search(id, pw) != null) {
 			System.out.println("정말로 삭제하시겠습니까?");
 			System.out.println("1.예 2.아니오");
 			if(sc.nextInt() == 1 ) {
-				return clientListImpl.delete(clientListImpl.search(id, pw));
+				return clientList.delete(clientList.search(id, pw));
 			}else {
 				return false;
 			}
@@ -100,7 +100,7 @@ public class ClientServiceImpl implements ClientService {
 		return false;
 	}
 	public Client search(String clientID) {
-		return clientListImpl.search(clientID);
+		return clientList.search(clientID);
 	}
 
 }
