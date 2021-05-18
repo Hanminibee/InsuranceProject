@@ -9,7 +9,6 @@ import entity.Client;
 import entity.CompensationHandle;
 import entity.Contract;
 import entity.InsuranceProduct;
-import entity.InsuranceProducts;
 import entity.Life;
 import entity.Manager;
 import entity.Pension;
@@ -234,7 +233,6 @@ public class ConsoleController {
 	}
 	
 	private ActualExpense developActualExpense(InsuranceProduct insuranceProduct) {
-		sc.nextLine();
 		ActualExpense actualExpense = (ActualExpense)insuranceProduct;
 		System.out.println("--실비보험을 개발합니다.--");
 		System.out.println("\n상품명을 입력해주세요.");
@@ -270,7 +268,6 @@ public class ConsoleController {
 	}
 	
 	private Cancer developCancer(InsuranceProduct insuranceProduct) {
-		sc.nextLine();
 		Cancer cancer = (Cancer)insuranceProduct;
 		System.out.println("--암보험을 개발합니다.--");
 		System.out.println("\n상품명을 입력해주세요.");
@@ -301,7 +298,6 @@ public class ConsoleController {
 	}
 	
 	private Pension developPension(InsuranceProduct insuranceProduct) {
-		sc.nextLine();
 		Pension pension = (Pension)insuranceProduct;
 		System.out.println("--연금보험을 개발합니다.--");
 		System.out.println("상품명을 입력해주세요.");
@@ -326,7 +322,6 @@ public class ConsoleController {
 	}
 	
 	private Life developLife(InsuranceProduct insuranceProduct) {
-		sc.nextLine();
 		Life life = (Life)insuranceProduct;
 		System.out.println("--종신보험을 개발합니다.--");
 		System.out.println("상품명을 입력해주세요.");
@@ -412,6 +407,7 @@ public class ConsoleController {
 		InsuranceProduct selectedInsuranceProduct = this.insuranceMenu(insuranceProductService.showInsuranceProductIsApproval());
 		System.out.println("해당 보험을 수정하시겠습니까? 1.수정하기, 2.뒤로가기");
 		int input = sc.nextInt();
+		sc.nextLine();
 		switch(input) {
 		case 1:
 			this.modifyInsuranceProduct(selectedInsuranceProduct);
@@ -521,12 +517,12 @@ public class ConsoleController {
 		if(contractList.size()>0) {
 			System.out.println("[인수심사 계약 목록]");
 			for(int i = 0; i < contractList.size(); i++)
-				System.out.println(String.format("%d.%5s%10s", i+1, contractList.get(i).getClientID(), contractList.get(i).getProductName()));
+				System.out.println(String.format("%d.%5s%10s", i+1, contractList.get(i).getClient().getName(), contractList.get(i).getInsuranceProduct().getProductName()));
 			
 			System.out.println("인수심사할 계약의 번호를 입력해주세요.");
 			int input = sc.nextInt();
 			Contract contract = contractList.get(input-1);
-			this.showClientInfo(contract.getClientID());
+			this.showClientInfo(contract.getClient().getId());
 //			this.showInsuranceProductDetail(contract.getProductName());
 			return contract;
 		}else {
@@ -584,8 +580,8 @@ public class ConsoleController {
 			System.out.println("[사고 목록]");
 			int i = 0;
 			for(Accident accident : accidentList) {
-				Client client = clientService.search(accident.getClientID());
-				System.out.println(String.format("%d.%5s%10s%12s", i+1, client.getName(), accident.getProductName(), accident.getReceptionDate().toString()));
+				Client client = accident.getClient();
+				System.out.println(String.format("%d.%5s%10s%12s", i+1, client.getName(), accident.getInsuranceProduct().getProductName(), accident.getReceptionDate().toString()));
 				i++;
 			}
 			System.out.println("상세정보를 보고 싶은 사고의 번호를 입력해주세요.");
@@ -595,7 +591,7 @@ public class ConsoleController {
 	}
 	
 	private void showAccidentDetail(CompensationHandle compensationHandle, Accident accident) {
-		Client client = clientService.search(accident.getClientID());
+		Client client = accident.getClient();
 		System.out.println("[상세정보]");
 		System.out.println("고객 이름: " + client.getName());
 		System.out.println("고객 나이: " + client.getAge());

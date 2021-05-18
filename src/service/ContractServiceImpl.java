@@ -38,10 +38,8 @@ public class ContractServiceImpl implements ContractService {
 	// accident
 	public ArrayList<Accident> showAccidentListByProductType(InsuranceProductType insuranceProductType) {
 		ArrayList<Accident> returnList = new ArrayList<Accident>();
-		String productName = "";
 		for (Accident accident : accidentList.getAccidentList()) {
-			productName = accident.getProductName();
-			if (insuranceProductType == insuranceProductList.search(productName).getInsuranceProductType())
+			if (insuranceProductType == accident.getInsuranceProduct().getInsuranceProductType())
 				returnList.add(accident);
 		}
 		return accidentList.getAccidentList();
