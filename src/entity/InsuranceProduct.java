@@ -76,6 +76,10 @@ public class InsuranceProduct implements Cloneable{
 	public void setApproval(boolean approval) {
 		this.approval = approval;
 	}
+	
+	public int getApproval() { //jdbc
+		return this.approval? 1 : 0;
+	}
 
 	public void RegisterClient() {
 		

@@ -618,8 +618,10 @@ public class ConsoleController {
 			System.out.println("4.로그아웃");
 			switch(sc.nextInt()) {
 			case 1:
+				this.manageClientMenu();
 				break;
 			case 2:
+				this.insuranceProductsMenu();
 				break;
 			case 3:
 				managerLogin = null;
@@ -628,17 +630,28 @@ public class ConsoleController {
 		}
 	}
 	
+	private void manageClientMenu() {
+		
+	}
+	
+	
+	
 	private InsuranceProduct insuranceMenu(ArrayList<InsuranceProduct> insuranceProductList) {
 		System.out.println("\n---InsuranceList---");
 		int i = 1;
-		for(InsuranceProduct insuranceProduct : insuranceProductList) {
-			System.out.println(i+". " + insuranceProduct.getProductName() +" "+ insuranceProduct.getInsuranceProductType().getInsuranceName());
-			i++;
+		if(insuranceProductList.isEmpty()) {
+			System.out.println("현재 준비된 상품이 없습니다.");
+			return null;
+		}else {
+			for(InsuranceProduct insuranceProduct : insuranceProductList) {
+				System.out.println(i+". " + insuranceProduct.getProductName() +" "+ insuranceProduct.getInsuranceProductType().getInsuranceName());
+				i++;
+			}
+			System.out.println("보험상품의 번호를 입력해주세요.");
+			InsuranceProduct selectInsurance = insuranceProductList.get(sc.nextInt()-1);
+			this.showInsuranceProductDetail(selectInsurance);
+			return selectInsurance;
 		}
-		System.out.println("보험상품의 번호를 입력해주세요.");
-		InsuranceProduct selectInsurance = insuranceProductList.get(sc.nextInt()-1);
-		this.showInsuranceProductDetail(selectInsurance);
-		return selectInsurance;
 	}
 	
 	private void showInsuranceProductDetail(InsuranceProduct insuranceProduct) {

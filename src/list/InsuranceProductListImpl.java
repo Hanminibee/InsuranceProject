@@ -15,7 +15,7 @@ public class InsuranceProductListImpl implements InsuranceProductList {
 		ActualExpense ae = new ActualExpense();
 		ae.setProductName("테스트실비보험");
 		ae.setInsuranceProductType(InsuranceProductType.ACTUALEXPENSE);
-		ae.setApproval(true);
+		ae.setApproval(false);
 		this.add(ae);
 	}
 	public ArrayList<InsuranceProduct> getInsuranceProductList() {
