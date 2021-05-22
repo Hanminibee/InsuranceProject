@@ -28,15 +28,14 @@ public class InsuranceProductListImpl implements InsuranceProductList {
 	public boolean delete(InsuranceProduct insuranceProduct) {
 		return insuranceProductList.remove(insuranceProduct);
 	}
-	public InsuranceProduct search(InsuranceProduct insuranceProduct) {
-		return null;
-	}
+	
 	public InsuranceProduct search(String productName) {
 		for(InsuranceProduct insuranceProduct : insuranceProductList)
 			if(productName.equals(insuranceProduct.getProductName()))
 				return insuranceProduct;
 		return null;
 	}
+	
 	public ArrayList<InsuranceProduct> searchListByApproval(boolean approval) {
 		ArrayList<InsuranceProduct> returnList = new ArrayList<InsuranceProduct>();
 		for(InsuranceProduct insuranceProduct : insuranceProductList) {

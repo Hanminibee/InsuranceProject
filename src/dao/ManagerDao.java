@@ -1,5 +1,9 @@
 package dao;
 
-public interface ManagerDao {
+import entity.Manager;
 
+public interface ManagerDao {
+	public boolean add(Manager manager);
+	public boolean delete(Manager manager);
+	public Manager search(String managerId, String password);
 }
