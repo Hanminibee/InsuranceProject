@@ -1,3 +1,5 @@
 eclipse.preferences.version=1
-encoding//src/Main.java=UTF-8
+encoding//src/controller/ConsoleController.java=UTF-8
 encoding//src/controller/Main.java=UTF-8
+encoding//src/entity/CompensationHandle.java=UTF-8
+encoding//src/service/ManagerServiceImpl.java=UTF-8

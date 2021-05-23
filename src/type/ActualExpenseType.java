@@ -1,6 +1,6 @@
 package type;
 public enum ActualExpenseType {
-	ADMISSION("ìž…ì›"), HOSPITALTREATMENT("ë³‘ì›ì§„ë£Œë¹„"), MEDICINEPRESCRIPTION("ì•½ì²˜ë°©ë¹„");
+	ADMISSION("ÀÔ¿ø"), HOSPITALTREATMENT("º´¿øÁø·áºñ"), MEDICINEPRESCRIPTION("¾àÃ³¹æºñ");
 	
 	private String actualexpensename;
 	

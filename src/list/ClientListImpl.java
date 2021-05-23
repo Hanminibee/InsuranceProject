@@ -1,34 +1,25 @@
 package list;
 
 import java.util.ArrayList;
-import java.util.Scanner;
+
 
 import entity.Client;
 
 public class ClientListImpl implements ClientList {
-
-	Scanner sc = new Scanner(System.in);
 	ArrayList<Client> clientList = new ArrayList<Client>();
 
 	public ArrayList<Client> getClientList() {
 		return this.clientList;
 	}
-
 	public void setClientlist(ArrayList<Client> clientlist) {
 		this.clientList = clientlist;
 	}
-
-	@Override
 	public boolean add(Client client) {
 		return this.clientList.add(client);
 	}
-
-	@Override
 	public boolean delete(Client client) {
 		return this.clientList.remove(client);
 	}
-
-	@Override
 	public Client search(String clientID) {
 		for (Client client : clientList) {
 			if (clientID.equals(client.getId()))
@@ -36,14 +27,12 @@ public class ClientListImpl implements ClientList {
 		}
 		return null;
 	}
-
-	@Override
 	public Client search(String clientID, String password) {
+		System.out.println(clientList.size());
 		for (Client client : clientList) {
 			if (clientID.equals(client.getId()) & password.equals(client.getPassword()))
 				return client;
 		}
 		return null;
 	}
-
 }

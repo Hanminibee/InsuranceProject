@@ -1,44 +1,36 @@
 package service;
-
 import java.util.Scanner;
-
 import entity.Manager;
 import list.ManagerListImpl;
 import type.ManagerType;
-
 public class ManagerServiceImpl implements ManagerService{
-	
 	private Scanner sc;
 	private ManagerListImpl managerListImpl;
 	
 	public ManagerServiceImpl() {
 		this.sc = new Scanner(System.in);
 		this.managerListImpl = new ManagerListImpl();
-		
 	}
-	
 	public void association() {
 		
 	}
-
-	@Override
 	public boolean register() {
 		System.out.println("[JobPosition]");
-		System.out.println("[1.º¸Çè»óÇ°°³¹ßÀÚ 2.º¸Çè»óÇ°½ÂÀÎÀÚ 3.U/W 4.°è¾à°ü¸®ÀÚ 5.º¸»óÃ³¸®ÀÚ 6.¿µ¾÷»ç¿ø]");
+		System.out.println("[1.ë³´í—˜ìƒí’ˆê°œë°œì 2.ë³´í—˜ìƒí’ˆìŠ¹ì¸ì 3.U/W 4.ê³„ì•½ê´€ë¦¬ì 5.ë³´ìƒì²˜ë¦¬ì 6.ì˜ì—…ì‚¬ì›]");
 		int input = sc.nextInt();
 		Manager manager = ManagerType.values()[input-1].getManager().clone();
 		manager.setJobPosition(ManagerType.values()[input-1]);
 		sc.nextLine();
 		
-		System.out.println("[ÀÌ¸§]");
-		manager.setName(sc.nextLine());
+		//System.out.println("[ì´ë¦„]");
+		//manager.setName(sc.nextLine());
 		
-		System.out.println("[³ªÀÌ]");
-		manager.setAge(sc.nextInt());
-		sc.nextLine();
+		//System.out.println("[ë‚˜ì´]");
+		//manager.setAge(sc.nextInt());
+		//sc.nextLine();
 		
-		System.out.println("[ÀüÈ­¹øÈ£]");
-		manager.setPhoneNumber(sc.nextLine());
+		//System.out.println("[ì „í™”ë²ˆí˜¸]");
+		//manager.setPhoneNumber(sc.nextLine());
 		
 		System.out.println("[ID]");
 		manager.setId(sc.nextLine());
@@ -48,8 +40,6 @@ public class ManagerServiceImpl implements ManagerService{
 		
 		return managerListImpl.add(manager);
 	}
-	
-	@Override
 	public Manager login() {
 		System.out.println("[ID]");
 		String id = sc.nextLine();
@@ -58,8 +48,6 @@ public class ManagerServiceImpl implements ManagerService{
 		
 		return managerListImpl.search(id, pw);
 	}
-
-	@Override
 	public boolean delete() {
 		System.out.println("[ID]");
 		String id = sc.nextLine();
@@ -68,5 +56,4 @@ public class ManagerServiceImpl implements ManagerService{
 		
 		return managerListImpl.delete(managerListImpl.search(id, pw));
 	}
-	
 }

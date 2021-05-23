@@ -4,30 +4,28 @@ import java.util.ArrayList;
 
 import entity.Accident;
 import entity.Contract;
-import list.AccidentList;
 import list.AccidentListImpl;
-import list.ContractList;
 import list.ContractListImpl;
-import list.InsuranceProductList;
+import list.InsuranceProductListImpl;
 import type.InsuranceProductType;
 
 public class ContractServiceImpl implements ContractService {
 
-	private ContractList contractList;
-	private AccidentList accidentList;
-	private InsuranceProductList insuranceProductList;
+	private ContractListImpl contractListImpl;
+	private AccidentListImpl accidentListImpl;
+	private InsuranceProductListImpl insuranceProductListImpl;
 
 	public ContractServiceImpl() {
-		this.contractList = new ContractListImpl();
-		this.accidentList = new AccidentListImpl();
+		this.contractListImpl = new ContractListImpl();
+		this.accidentListImpl = new AccidentListImpl();
 	}
 	
-	public void association(InsuranceProductList insuranceProductList) {
-		this.insuranceProductList = insuranceProductList;
+	public void association(InsuranceProductListImpl insuranceProductListImpl) {
+		this.insuranceProductListImpl = insuranceProductListImpl;
 	}
 
 	public ArrayList<Contract> selectNotApproval() {
-		ArrayList<Contract> list = contractList.getContractList();
+		ArrayList<Contract> list = contractListImpl.getContractList();
 		for (Contract contract : list) {
 			if (!contract.isApproval())
 				list.add(contract);
@@ -38,11 +36,19 @@ public class ContractServiceImpl implements ContractService {
 	// accident
 	public ArrayList<Accident> showAccidentListByProductType(InsuranceProductType insuranceProductType) {
 		ArrayList<Accident> returnList = new ArrayList<Accident>();
-		for (Accident accident : accidentList.getAccidentList()) {
-			if (insuranceProductType == accident.getInsuranceProduct().getInsuranceProductType())
+		String productName = "";
+		for (Accident accident : accidentListImpl.getAccidentList()) {
+			productName = accident.getProductName();
+			if (insuranceProductType == insuranceProductListImpl.search(productName).getInsuranceProductType())
 				returnList.add(accident);
 		}
-		return accidentList.getAccidentList();
+		return accidentListImpl.getAccidentList();
 	}
 
+	public  ArrayList<Contract> showExpiredInsurance() {
+		ArrayList<Contract> list = contractListImpl.getContractList();
+		return list;
+		
+	}
+	
 }

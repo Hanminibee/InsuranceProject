@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class Accident {
 	private int accidentNum;
-	private Client client;
-	private InsuranceProduct insuranceProduct;
+	private String clientID;
+	private String productName;
 	private String accidentDetail;
 	private Date receptionDate;
 
@@ -15,18 +15,17 @@ public class Accident {
 	public void setAccidentNum(int accidentNum) {
 		this.accidentNum = accidentNum;
 	}
-
-	public Client getClient() {
-		return client;
+	public String getClientID() {
+		return clientID;
 	}
-	public void setClient(Client client) {
-		this.client = client;
+	public void setClientID(String clientID) {
+		this.clientID = clientID;
 	}
-	public InsuranceProduct getInsuranceProduct() {
-		return insuranceProduct;
+	public String getProductName() {
+		return productName;
 	}
-	public void setInsuranceProduct(InsuranceProduct insuranceProduct) {
-		this.insuranceProduct = insuranceProduct;
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 	public String getAccidentDetail() {
 		return accidentDetail;
