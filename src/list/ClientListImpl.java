@@ -6,7 +6,6 @@ import java.util.Scanner;
 import entity.Client;
 
 public class ClientListImpl implements ClientList {
-	Scanner sc = new Scanner(System.in);
 	ArrayList<Client> clientList = new ArrayList<Client>();
 
 	public ArrayList<Client> getClientList() {
@@ -29,6 +28,7 @@ public class ClientListImpl implements ClientList {
 		return null;
 	}
 	public Client search(String clientID, String password) {
+		System.out.println(clientList.size());
 		for (Client client : clientList) {
 			if (clientID.equals(client.getId()) & password.equals(client.getPassword()))
 				return client;

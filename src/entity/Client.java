@@ -2,11 +2,6 @@ package entity;
 
 import type.ClientJobType;
 
-/**
- * @author hm539
- * @version 1.0
- * @created 28-4-2021 ���� 5:02:47
- */
 public class Client {
 
 	// attributes

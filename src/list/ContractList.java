@@ -11,4 +11,3 @@ public interface ContractList {
 	public ArrayList<Contract> searchByClient(String clientID);
 	public ArrayList<Contract> getContractList();
 }
-

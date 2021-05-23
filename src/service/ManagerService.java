@@ -10,4 +10,3 @@ public interface ManagerService {
 	public boolean delete(String id, String pw);
 	
 }
-

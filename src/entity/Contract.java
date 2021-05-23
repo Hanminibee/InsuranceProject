@@ -3,28 +3,23 @@ package entity;
 import java.util.Date;
 
 public class Contract {
-
-	private Client client;
+	
+	private String clientID;
 	private Date insuranceContractDate;
 	private Date insuranceExpiryDate;
-	private InsuranceProduct insuranceProduct;
-	private SalesPerson salesPerson;
+	private String productName;
+	private String NameOfSalesPerson;
 	private boolean approval;
-
+	
 	public Contract() {
 		this.approval = false;
 	}
-	public Client getClient() {
-		return client;
+	
+	public String getClientID() {
+		return clientID;
 	}
-	public void setClient(Client client) {
-		this.client = client;
-	}
-	public InsuranceProduct getInsuranceProduct() {
-		return insuranceProduct;
-	}
-	public void setInsuranceProduct(InsuranceProduct insuranceProduct) {
-		this.insuranceProduct = insuranceProduct;
+	public void setClientID(String clientID) {
+		this.clientID = clientID;
 	}
 	public Date getInsuranceContractDate() {
 		return insuranceContractDate;
@@ -38,11 +33,17 @@ public class Contract {
 	public void setInsuranceExpiryDate(Date insuranceExpiryDate) {
 		this.insuranceExpiryDate = insuranceExpiryDate;
 	}
-	public SalesPerson getSalesPerson() {
-		return salesPerson;
+	public String getProductName() {
+		return productName;
 	}
-	public void setSalesPerson(SalesPerson salesPerson) {
-		this.salesPerson = salesPerson;
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+	public String getNameOfSalesPerson() {
+		return NameOfSalesPerson;
+	}
+	public void setNameOfSalesPerson(String nameOfSalesPerson) {
+		NameOfSalesPerson = nameOfSalesPerson;
 	}
 	public boolean isApproval() {
 		return approval;
