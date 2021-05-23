@@ -9,7 +9,7 @@ public enum JDBCValue {
 	private String value;
 	
 	JDBCValue(String value){
-		
+		this.value = value;
 	}
 	
 	public String getValue() {

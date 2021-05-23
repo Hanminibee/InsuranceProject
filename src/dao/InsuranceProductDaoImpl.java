@@ -118,7 +118,9 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao {
 				ptmt.setInt(2, life.getRequiredPaymentPeriod());
 				break;
 			}
-			ptmt.executeUpdate();
+			int rowAmount = ptmt.executeUpdate();
+			if(rowAmount > 0)
+				success = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -218,7 +220,9 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao {
 			conn = this.getConnection();
 			ptmt = conn.prepareStatement(query.toString());
 			ptmt.setString(1, insuranceProduct.getProductName());
-			ptmt.executeUpdate();
+			int rowAmount = ptmt.executeUpdate();
+			if(rowAmount > 0)
+				success = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -240,8 +244,6 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao {
 			resultSet = ptmt.executeQuery();
 			if(resultSet.next()) {
 				return this.createObject();
-			}else {
-				return null;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

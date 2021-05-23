@@ -55,7 +55,9 @@ public class AccidentDaoImpl implements AccidentDao{
 			ptmt.setString(2, accident.getInsuranceProduct().getProductName());
 			ptmt.setString(3, accident.getAccidentDetail());
 			ptmt.setDate(4, (Date)accident.getReceptionDate());
-			ptmt.executeUpdate();
+			int rowAmount = ptmt.executeUpdate();
+			if(rowAmount > 0)
+				success = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -74,7 +76,9 @@ public class AccidentDaoImpl implements AccidentDao{
 			conn = this.getConnection();
 			ptmt = conn.prepareStatement(query.toString());
 			ptmt.setInt(1, accident.getAccidentNum());
-			ptmt.executeUpdate();
+			int rowAmount = ptmt.executeUpdate();
+			if(rowAmount > 0)
+				success = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -112,6 +116,7 @@ public class AccidentDaoImpl implements AccidentDao{
 	
 	private Accident createObject() {
 		Accident accident = new Accident();
+		
 		return accident;
 	}
 

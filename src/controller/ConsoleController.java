@@ -634,8 +634,6 @@ public class ConsoleController {
 		
 	}
 	
-	
-	
 	private InsuranceProduct insuranceMenu(ArrayList<InsuranceProduct> insuranceProductList) {
 		System.out.println("\n---InsuranceList---");
 		int i = 1;

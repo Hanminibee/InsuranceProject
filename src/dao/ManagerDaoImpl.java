@@ -56,7 +56,9 @@ public class ManagerDaoImpl implements ManagerDao{
 			ptmt.setInt(4, manager.getAge());
 			ptmt.setString(5, manager.getPhoneNumber());
 			ptmt.setString(6, manager.getJobPosition().toString());
-			ptmt.executeUpdate();
+			int rowAmount = ptmt.executeUpdate();
+			if(rowAmount > 0)
+				success = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -77,7 +79,9 @@ public class ManagerDaoImpl implements ManagerDao{
 			ptmt = conn.prepareStatement(query.toString());
 			ptmt.setString(1, manager.getId());
 			ptmt.setString(2, manager.getPassword());
-			ptmt.executeUpdate();
+			int rowAmount = ptmt.executeUpdate();
+			if(rowAmount > 0)
+				success = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
