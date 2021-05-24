@@ -26,10 +26,10 @@ public class ContractServiceImpl implements ContractService {
 		this.insuranceProductList = insuranceProductList;
 	}
 
-	public ArrayList<Contract> selectNotApproval() {
+	public ArrayList<Contract> selectByApproval(boolean approval) {
 		ArrayList<Contract> list = contractList.getContractList();
 		for (Contract contract : list) {
-			if (!contract.isApproval())
+			if (contract.isApproval() == approval)
 				list.add(contract);
 		}
 		return list;

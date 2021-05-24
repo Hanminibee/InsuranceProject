@@ -9,7 +9,7 @@ import type.InsuranceProductType;
 
 public interface ContractService {
 	public void association(InsuranceProductList insuranceProductList);
-	public ArrayList<Contract> selectNotApproval();
+	public ArrayList<Contract> selectByApproval(boolean approval);
 	public ArrayList<Accident> showAccidentListByProductType(InsuranceProductType insuranceProductType);
 
 }

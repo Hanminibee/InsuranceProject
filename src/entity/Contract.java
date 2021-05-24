@@ -3,48 +3,58 @@ package entity;
 import java.util.Date;
 
 public class Contract {
-	
-	private String clientID;
+
+	private Client client;
 	private Date insuranceContractDate;
 	private Date insuranceExpiryDate;
-	private String productName;
-	private String NameOfSalesPerson;
+	private InsuranceProduct insuranceProduct;
+	private Manager salesPerson;
 	private boolean approval;
-	
+
 	public Contract() {
 		this.approval = false;
 	}
-	
-	public String getClientID() {
-		return clientID;
+
+	public Client getClient() {
+		return client;
 	}
-	public void setClientID(String clientID) {
-		this.clientID = clientID;
+
+	public void setClient(Client client) {
+		this.client = client;
 	}
+
 	public Date getInsuranceContractDate() {
 		return insuranceContractDate;
 	}
+
 	public void setInsuranceContractDate(Date insuranceContractDate) {
 		this.insuranceContractDate = insuranceContractDate;
 	}
+
 	public Date getInsuranceExpiryDate() {
 		return insuranceExpiryDate;
 	}
+
 	public void setInsuranceExpiryDate(Date insuranceExpiryDate) {
 		this.insuranceExpiryDate = insuranceExpiryDate;
 	}
-	public String getProductName() {
-		return productName;
+
+	public InsuranceProduct getInsuranceProduct() {
+		return insuranceProduct;
 	}
-	public void setProductName(String productName) {
-		this.productName = productName;
+
+	public void setInsuranceProduct(InsuranceProduct insuranceProduct) {
+		this.insuranceProduct = insuranceProduct;
 	}
-	public String getNameOfSalesPerson() {
-		return NameOfSalesPerson;
+
+	public Manager getSalesPerson() {
+		return salesPerson;
 	}
-	public void setNameOfSalesPerson(String nameOfSalesPerson) {
-		NameOfSalesPerson = nameOfSalesPerson;
+
+	public void setSalesPerson(Manager salesPerson) {
+		this.salesPerson = salesPerson;
 	}
+
 	public boolean isApproval() {
 		return approval;
 	}

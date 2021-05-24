@@ -25,7 +25,7 @@ public class ContractListImpl implements ContractList{
 	@Override
 	public Contract search(String clientID, String productName) {
 		for(Contract contract : contractList) {
-			if(clientID.equals(contract.getClientID()) && productName.equals(contract.getProductName()))
+			if(clientID.equals(contract.getClient().getId()) && productName.equals(contract.getInsuranceProduct().getProductName()))
 				return contract;
 		}
 		return null;
@@ -35,7 +35,7 @@ public class ContractListImpl implements ContractList{
 	public ArrayList<Contract> searchByClient(String clientID) {
 		ArrayList<Contract> returnList = new ArrayList<Contract>();
 		for(Contract contract : contractList) {
-			if(clientID.equals(contract.getClientID()))
+			if(clientID.equals(contract.getClient().getId()))
 				returnList.add(contract);
 		}
 		return returnList;

@@ -530,16 +530,16 @@ public class ConsoleController {
 	}
 	
 	private Contract selectUnderWriteContract() {
-		ArrayList<Contract> contractList = contractService.selectNotApproval();
+		ArrayList<Contract> contractList = contractService.selectByApproval(false);
 		if (contractList.size() > 0) {
 			System.out.println("[인수심사 계약 목록]");
 			for (int i = 0; i < contractList.size(); i++)
-				System.out.println(String.format("%d.%5s%10s", i + 1, contractList.get(i).getClientID(),
-						contractList.get(i).getProductName()));
+				System.out.println(String.format("%d.%5s%10s", i + 1, contractList.get(i).getClient().getId(),
+						contractList.get(i).getInsuranceProduct().getProductName()));
 			System.out.println("인수심사할 계약의 번호를 입력해주세요.");
 			int input = sc.nextInt();
 			Contract contract = contractList.get(input - 1);
-			this.showClientInfo(contract.getClientID());
+			this.showClientInfo(contract.getClient().getId());
 //			this.showInsuranceProductDetail(contract.getProductName());
 			return contract;
 		} else {
