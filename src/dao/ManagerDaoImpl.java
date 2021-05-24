@@ -46,7 +46,7 @@ public class ManagerDaoImpl implements ManagerDao{
 		try {
 			query = new StringBuffer();
 			query.append("INSERT INTO managers");
-			query.append("(name, manager_id, manager_password, age, phone_number, manager_type)");
+			query.append("(name, manager_id, manager_password, age, phone_number, manager_type) ");
 			query.append("VALUES(?, ?, ?, ?, ?, ?);");
 			conn = this.getConnection();
 			ptmt = conn.prepareStatement(query.toString());

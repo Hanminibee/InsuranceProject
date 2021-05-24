@@ -47,7 +47,7 @@ public class AccidentDaoImpl implements AccidentDao{
 		try {
 			query = new StringBuffer();
 			query.append("INSERT INTO accidents");
-			query.append("(client_Id, insurance_product_name, accident_detail, reception_date)");
+			query.append("(client_Id, insurance_product_name, accident_detail, reception_date) ");
 			query.append("VALUES(?, ?, ?, ?);");
 			conn = this.getConnection();
 			ptmt = conn.prepareStatement(query.toString());

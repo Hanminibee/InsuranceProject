@@ -53,9 +53,8 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao {
 		try {
 			query = new StringBuffer();
 			query.append("INSERT INTO insurance_product");
-			query.append(
-					"(insurance_product_name, basic_insurance_premium, insurance_money, "
-							+ "insurance_product_type, payment_cycle, payment_period, approval)");
+			query.append("(insurance_product_name, basic_insurance_premium, insurance_money, "
+							+ "insurance_product_type, payment_cycle, payment_period, approval) ");
 			query.append("VALUES(?, ?, ?, ?, ?, ?, ?);");
 
 			conn = this.getConnection();
@@ -76,7 +75,7 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao {
 				ActualExpense actualExpense = (ActualExpense)insuranceProduct;
 				query.append("INSERT INTO actual_expenses");
 				query.append("(insurance_product_name, actual_expense_type, limit_of_indemnity, "
-								+ "limit_age, self_payment)");
+								+ "limit_age, self_payment) ");
 				query.append("VALUES(?, ?, ?, ?, ?);");
 				conn = this.getConnection();
 				ptmt = conn.prepareStatement(query.toString());
@@ -89,7 +88,7 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao {
 			case CANCER:
 				Cancer cancer = (Cancer)insuranceProduct;
 				query.append("INSERT INTO cancers");
-				query.append("(insurance_product_name, guaranteed_type, limit_age)");
+				query.append("(insurance_product_name, guaranteed_type, limit_age) ");
 				query.append("VALUES(?, ?, ?);");
 				conn = this.getConnection();
 				ptmt = conn.prepareStatement(query.toString());
@@ -100,7 +99,7 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao {
 			case PENSION:
 				Pension pension = (Pension)insuranceProduct;
 				query.append("INSERT INTO pensions");
-				query.append("(insurance_product_name, guaranteed_period)");
+				query.append("(insurance_product_name, guaranteed_period) ");
 				query.append("VALUES(?, ?);");
 				conn = this.getConnection();
 				ptmt = conn.prepareStatement(query.toString());
@@ -110,7 +109,7 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao {
 			case LIFE:
 				Life life = (Life)insuranceProduct;
 				query.append("INSERT INTO lifes");
-				query.append("(insurance_product_name, required_payment_period)");
+				query.append("(insurance_product_name, required_payment_period) ");
 				query.append("VALUES(?, ?);");
 				conn = this.getConnection();
 				ptmt = conn.prepareStatement(query.toString());
@@ -235,7 +234,7 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao {
 	public InsuranceProduct search(String productName) {
 		try {
 			query = new StringBuffer();
-			query.append("SELECT insurance_product_type, insurance_product_name FROM insurance_product");
+			query.append("SELECT insurance_product_type, insurance_product_name FROM insurance_product ");
 			query.append("WHERE insurance_product_name = ?;");
 			conn = this.getConnection();
 			ptmt = conn.prepareStatement(query.toString());
@@ -259,7 +258,7 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao {
 		switch (productType) {
 			case ACTUALEXPENSE:
 				query = new StringBuffer();
-				query.append("SELECT * FROM insurance_product JOIN actual_expenses");
+				query.append("SELECT * FROM insurance_product JOIN actual_expenses ");
 				query.append("ON insurance_product_name = ?;");
 				conn = this.getConnection();
 				ptmt = conn.prepareStatement(query.toString());
@@ -268,7 +267,7 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao {
 				return createActualExpense();
 			case CANCER:
 				query = new StringBuffer();
-				query.append("SELECT * FROM insurance_product JOIN cancers");
+				query.append("SELECT * FROM insurance_product JOIN cancers ");
 				query.append("ON insurance_product_name = ?;");
 				conn = this.getConnection();
 				ptmt = conn.prepareStatement(query.toString());
@@ -277,7 +276,7 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao {
 				return createCancer();
 			case PENSION:
 				query = new StringBuffer();
-				query.append("SELECT * FROM insurance_product JOIN pensions");
+				query.append("SELECT * FROM insurance_product JOIN pensions ");
 				query.append("ON insurance_product_name = ?;");
 				conn = this.getConnection();
 				ptmt = conn.prepareStatement(query.toString());
@@ -286,7 +285,7 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao {
 				return createPension();
 			case LIFE:
 				query = new StringBuffer();
-				query.append("SELECT * FROM insurance_product JOIN lifes");
+				query.append("SELECT * FROM insurance_product JOIN lifes ");
 				query.append("ON insurance_product_name = ?;");
 				conn = this.getConnection();
 				ptmt = conn.prepareStatement(query.toString());
@@ -362,7 +361,7 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao {
 		ArrayList<InsuranceProduct> list = new ArrayList<InsuranceProduct>();
 		try {
 			query = new StringBuffer();
-			query.append("SELECT * FROM insurance_product");
+			query.append("SELECT * FROM insurance_product ");
 			query.append("WHERE approval = ?;");
 			conn = this.getConnection();
 			ptmt = conn.prepareStatement(query.toString());
