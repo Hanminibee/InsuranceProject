@@ -1,5 +1,6 @@
 package entity;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class Contract {
@@ -35,8 +36,11 @@ public class Contract {
 		return insuranceExpiryDate;
 	}
 
-	public void setInsuranceExpiryDate(Date insuranceExpiryDate) {
-		this.insuranceExpiryDate = insuranceExpiryDate;
+	public void setInsuranceExpiryDate(int paymentPeriod) {
+		Calendar ca = Calendar.getInstance();
+		ca.setTime(this.insuranceContractDate);
+		ca.add(Calendar.YEAR, paymentPeriod);
+		this.insuranceExpiryDate = ca.getTime()  ;
 	}
 
 	public InsuranceProduct getInsuranceProduct() {
