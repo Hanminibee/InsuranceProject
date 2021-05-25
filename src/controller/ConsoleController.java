@@ -716,7 +716,7 @@ public class ConsoleController {
 			System.out.println("\n---salesPersonMenu---");
 			System.out.println("1.영업 활동 관리");
 			System.out.println("2.모든 보험 조회");
-			System.out.println("4.로그아웃");
+			System.out.println("3.로그아웃");
 			switch (sc.nextInt()) {
 			case 1:
 				ArrayList<Contract> newList = contractService.searchBySalesPerson(managerLogin.getId());
@@ -738,7 +738,7 @@ public class ConsoleController {
 	
 	private void registeInsuranceProduct(InsuranceProduct selectInsuranceProduct) { // 0525 보험 계약 메서드
 		System.out.println("---해당 보험을 가입하시겠습니까?---");
-		System.out.println("1. 네" + "2. 아니요");
+		System.out.println("1. 네" + " 2. 아니요");
 		switch(sc.nextInt()) {
 		case 1:
 			this.clientLoginMenu();

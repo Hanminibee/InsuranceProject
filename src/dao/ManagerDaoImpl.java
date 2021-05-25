@@ -52,7 +52,7 @@ public class ManagerDaoImpl implements ManagerDao{
 			ptmt = conn.prepareStatement(query.toString());
 			ptmt.setString(1, manager.getName());
 			ptmt.setString(2, manager.getId());
-			ptmt.setString(3, manager.getId());
+			ptmt.setString(3, manager.getPassword());
 			ptmt.setInt(4, manager.getAge());
 			ptmt.setString(5, manager.getPhoneNumber());
 			ptmt.setString(6, manager.getJobPosition().toString());
