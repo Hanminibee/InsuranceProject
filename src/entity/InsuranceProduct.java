@@ -4,13 +4,13 @@ import type.InsuranceProductType;
 
 public class InsuranceProduct implements Cloneable{
 
-	private String productName; //상품명
-	protected int basicInsurancePremium; //기본보험료
-	private int insuranceMoney; //보상금
-	private InsuranceProductType insuranceProductType; //보험타입
-	private int paymentCycle; //납입주기
-	private int paymentPeriod; //납입기간
-	private boolean approval; //승인여부
+	private String productName; 
+	protected int basicInsurancePremium; 
+	private int insuranceMoney; 
+	private InsuranceProductType insuranceProductType; 
+	private int paymentCycle;
+	private int paymentPeriod; 
+	private boolean approval; 
 
 	public InsuranceProduct() {
 		this.approval = false;

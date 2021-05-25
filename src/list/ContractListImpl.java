@@ -1,8 +1,8 @@
 package list;
 
 import java.util.ArrayList;
-
 import entity.Contract;
+import entity.SalesPerson;
 
 public class ContractListImpl implements ContractList{
 	
@@ -23,36 +23,40 @@ public class ContractListImpl implements ContractList{
 	}
 
 	@Override
-	public Contract search(Contract client, Contract insuranceProduct) {
+	public Contract search(String clientID, String productName) {
 		for(Contract contract : contractList) {
-			if(client.equals(contract.getClient()) && insuranceProduct.equals(contract.getInsuranceProduct()))
+			if(clientID.equals(contract.getClient().getId()) && productName.equals(contract.getInsuranceProduct().getProductName()))
 				return contract;
 		}
 		return null;
 	}
 	
-
-	public ArrayList<Contract> searchByClient(Contract client) {
-		ArrayList<Contract> returnList = new ArrayList<Contract>();
-		for(Contract contract : contractList) {
-			if(client.equals(contract.getClient()))
-				returnList.add(contract);
-		}
-		return returnList;
-	}
 	
 	public ArrayList<Contract> getContractList(){
 		return this.contractList;
 	}
 
 	@Override
-	public ArrayList<Contract> searchByClient(String clientID) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public ArrayList<Contract> searchByClient(String clientID) {
+        ArrayList<Contract> returnList = new ArrayList<Contract>();
+        for(Contract contract : contractList) {
+            if(clientID.equals(contract.getClient().getId()))
+                returnList.add(contract);
+        }
+        return returnList;
+    }
+	
 	public ArrayList<Contract> calculateExpiredDate(Contract insuranceExpiryDate){
-		Contract calculateExpiredDate = new Contract()
+		Contract calculateExpiredDate = new Contract() ;
 		return this.contractList;
 	}
+	public ArrayList<Contract> searchBySalesPerson (String salesPerson) {
+		   ArrayList<Contract> returnList = new ArrayList<Contract>();
+	        for(Contract contract : contractList) {
+	            if(salesPerson.equals(contract.getSalesPerson().getId()))
+	                returnList.add(contract);
+	        }
+	        return returnList;
+	    }
 	
 }
