@@ -130,82 +130,79 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao {
 
 	@Override
 	public boolean update(InsuranceProduct insuranceProduct) {
-//		boolean success = false;
-//		try {
-//			query = new StringBuffer();
-//			query.append("UPDATE insurance_product SET ");
-//			query.append("insurance_product_name = ?, basic_insurance_premium = ?, insurance_money = ?, "
-//							+ "payment_cycle = ?, payment_period = ?, approval = ?");
-//			query.append("WHERE ;");
-//
-//			conn = this.getConnection();
-//
-//			ptmt = conn.prepareStatement(query.toString());
-//			ptmt.setString(1, insuranceProduct.getProductName());
-//			ptmt.setInt(2, insuranceProduct.getBasicInsurancePremium());
-//			ptmt.setInt(3, insuranceProduct.getInsuranceMoney());
-//			ptmt.setString(4, insuranceProduct.getInsuranceProductType().toString());
-//			ptmt.setInt(5, insuranceProduct.getPaymentCycle());
-//			ptmt.setInt(6, insuranceProduct.getPaymentPeriod());
-//			ptmt.setInt(7, insuranceProduct.getApproval());
-//			ptmt.executeUpdate();
-//			
-//			query = new StringBuffer();
-//			switch(insuranceProduct.getInsuranceProductType()) {
-//			case ACTUALEXPENSE:
-//				ActualExpense actualExpense = (ActualExpense)insuranceProduct;
-//				query.append("INSERT INTO actual_expenses");
-//				query.append("(insurance_product_name, actual_expense_type, limit_of_indemnity, "
-//								+ "limit_age, self_payment)");
-//				query.append("VALUES(?, ?, ?, ?, ?);");
-//				conn = this.getConnection();
-//				ptmt = conn.prepareStatement(query.toString());
-//				ptmt.setString(1, actualExpense.getProductName());
-//				ptmt.setString(2, actualExpense.getActualExpenseType().toString());
-//				ptmt.setInt(3, actualExpense.getLimitOfIndemnity());
-//				ptmt.setInt(4, actualExpense.getLimitAge());
-//				ptmt.setInt(5, actualExpense.getSelfPayment());
-//				break;
-//			case CANCER:
-//				Cancer cancer = (Cancer)insuranceProduct;
-//				query.append("INSERT INTO cancers");
-//				query.append("(insurance_product_name, guaranteed_type, limit_age)");
-//				query.append("VALUES(?, ?, ?);");
-//				conn = this.getConnection();
-//				ptmt = conn.prepareStatement(query.toString());
-//				ptmt.setString(1, cancer.getProductName());
-//				ptmt.setString(2, cancer.getGuaranteedType().toString());
-//				ptmt.setInt(3, cancer.getLimitAge());
-//				break;
-//			case PENSION:
-//				Pension pension = (Pension)insuranceProduct;
-//				query.append("INSERT INTO pensions");
-//				query.append("(insurance_product_name, guaranteed_period)");
-//				query.append("VALUES(?, ?);");
-//				conn = this.getConnection();
-//				ptmt = conn.prepareStatement(query.toString());
-//				ptmt.setString(1, pension.getProductName());
-//				ptmt.setInt(2, pension.getGuaranteedPeriod());
-//				break;
-//			case LIFE:
-//				Life life = (Life)insuranceProduct;
-//				query.append("INSERT INTO lifes");
-//				query.append("(insurance_product_name, required_payment_period)");
-//				query.append("VALUES(?, ?);");
-//				conn = this.getConnection();
-//				ptmt = conn.prepareStatement(query.toString());
-//				ptmt.setString(1, life.getProductName());
-//				ptmt.setInt(2, life.getRequiredPaymentPeriod());
-//				break;
-//			}
-//			ptmt.executeUpdate();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			this.close();
-//		}
-//		return success;
-		return false;
+		boolean success = false;
+		try {
+			query = new StringBuffer();
+			query.append("UPDATE insurance_product ");
+			query.append("SET insurance_product_name = ?, basic_insurance_premium = ?, insurance_money = ?, "
+							+ "payment_cycle = ?, payment_period = ?, approval = ?");
+			query.append("WHERE insurance_product_num = ?;");
+			conn = this.getConnection();
+			ptmt = conn.prepareStatement(query.toString());
+			ptmt.setString(1, insuranceProduct.getProductName());
+			ptmt.setInt(2, insuranceProduct.getBasicInsurancePremium());
+			ptmt.setInt(3, insuranceProduct.getInsuranceMoney());
+			ptmt.setInt(4, insuranceProduct.getPaymentCycle());
+			ptmt.setInt(5, insuranceProduct.getPaymentPeriod());
+			ptmt.setInt(6, insuranceProduct.getApproval());
+			ptmt.setInt(7, insuranceProduct.getInsuranceProductNum());
+			ptmt.executeUpdate();
+			
+			query = new StringBuffer();
+			switch(insuranceProduct.getInsuranceProductType()) {
+			case ACTUALEXPENSE:
+				ActualExpense actualExpense = (ActualExpense)insuranceProduct;
+				query.append("INSERT INTO actual_expenses");
+				query.append("(insurance_product_name, actual_expense_type, limit_of_indemnity, "
+								+ "limit_age, self_payment)");
+				query.append("VALUES(?, ?, ?, ?, ?);");
+				conn = this.getConnection();
+				ptmt = conn.prepareStatement(query.toString());
+				ptmt.setString(1, actualExpense.getProductName());
+				ptmt.setString(2, actualExpense.getActualExpenseType().toString());
+				ptmt.setInt(3, actualExpense.getLimitOfIndemnity());
+				ptmt.setInt(4, actualExpense.getLimitAge());
+				ptmt.setInt(5, actualExpense.getSelfPayment());
+				break;
+			case CANCER:
+				Cancer cancer = (Cancer)insuranceProduct;
+				query.append("INSERT INTO cancers");
+				query.append("(insurance_product_name, guaranteed_type, limit_age)");
+				query.append("VALUES(?, ?, ?);");
+				conn = this.getConnection();
+				ptmt = conn.prepareStatement(query.toString());
+				ptmt.setString(1, cancer.getProductName());
+				ptmt.setString(2, cancer.getGuaranteedType().toString());
+				ptmt.setInt(3, cancer.getLimitAge());
+				break;
+			case PENSION:
+				Pension pension = (Pension)insuranceProduct;
+				query.append("INSERT INTO pensions");
+				query.append("(insurance_product_name, guaranteed_period)");
+				query.append("VALUES(?, ?);");
+				conn = this.getConnection();
+				ptmt = conn.prepareStatement(query.toString());
+				ptmt.setString(1, pension.getProductName());
+				ptmt.setInt(2, pension.getGuaranteedPeriod());
+				break;
+			case LIFE:
+				Life life = (Life)insuranceProduct;
+				query.append("INSERT INTO lifes");
+				query.append("(insurance_product_name, required_payment_period)");
+				query.append("VALUES(?, ?);");
+				conn = this.getConnection();
+				ptmt = conn.prepareStatement(query.toString());
+				ptmt.setString(1, life.getProductName());
+				ptmt.setInt(2, life.getRequiredPaymentPeriod());
+				break;
+			}
+			ptmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			this.close();
+		}
+		return success;
 	}
 
 	@Override
@@ -250,6 +247,29 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao {
 			this.close();
 		}
 		return null;
+	}
+	
+	@Override
+	public ArrayList<InsuranceProduct> searchListByApproval(boolean approval) {
+		ArrayList<InsuranceProduct> list = new ArrayList<InsuranceProduct>();
+		try {
+			query = new StringBuffer();
+			query.append("SELECT * FROM insurance_product ");
+			query.append("WHERE approval = ?;");
+			conn = this.getConnection();
+			ptmt = conn.prepareStatement(query.toString());
+			ptmt.setInt(1, approval? 1 : 0);
+			resultSet = ptmt.executeQuery();
+			while(resultSet.next()) {
+				InsuranceProduct insuranceProduct = this.createObject();
+				list.add(insuranceProduct);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			this.close();
+		}
+		return list;
 	}
 
 	private InsuranceProduct createObject() throws SQLException {
@@ -299,6 +319,7 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao {
 	private ActualExpense createActualExpense() throws SQLException {
 		ActualExpense actualExpense = new ActualExpense();
 		actualExpense.setInsuranceProductType(InsuranceProductType.ACTUALEXPENSE);
+		actualExpense.setInsuranceProductNum(resultSet.getInt("insurance_product_num"));
 		actualExpense.setProductName(resultSet.getString("insurance_product_name"));
 		actualExpense.setBasicInsurancePremium(resultSet.getInt("basic_insurance_premium"));
 		actualExpense.setInsuranceMoney(resultSet.getInt("insurance_money"));
@@ -315,7 +336,8 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao {
 
 	private InsuranceProduct createCancer() throws SQLException {
 		Cancer cancer = new Cancer();
-		cancer.setInsuranceProductType(InsuranceProductType.ACTUALEXPENSE);
+		cancer.setInsuranceProductType(InsuranceProductType.CANCER);
+		cancer.setInsuranceProductNum(resultSet.getInt("insurance_product_num"));
 		cancer.setProductName(resultSet.getString("insurance_product_name"));
 		cancer.setBasicInsurancePremium(resultSet.getInt("basic_insurance_premium"));
 		cancer.setInsuranceMoney(resultSet.getInt("insurance_money"));
@@ -330,7 +352,8 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao {
 
 	private InsuranceProduct createPension() throws SQLException {
 		Pension pension = new Pension();
-		pension.setInsuranceProductType(InsuranceProductType.ACTUALEXPENSE);
+		pension.setInsuranceProductType(InsuranceProductType.PENSION);
+		pension.setInsuranceProductNum(resultSet.getInt("insurance_product_num"));
 		pension.setProductName(resultSet.getString("insurance_product_name"));
 		pension.setBasicInsurancePremium(resultSet.getInt("basic_insurance_premium"));
 		pension.setInsuranceMoney(resultSet.getInt("insurance_money"));
@@ -344,7 +367,8 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao {
 
 	private InsuranceProduct createLife() throws SQLException {
 		Life life = new Life();
-		life.setInsuranceProductType(InsuranceProductType.ACTUALEXPENSE);
+		life.setInsuranceProductType(InsuranceProductType.LIFE);
+		life.setInsuranceProductNum(resultSet.getInt("insurance_product_num"));
 		life.setProductName(resultSet.getString("insurance_product_name"));
 		life.setBasicInsurancePremium(resultSet.getInt("basic_insurance_premium"));
 		life.setInsuranceMoney(resultSet.getInt("insurance_money"));
@@ -356,26 +380,4 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao {
 		return life;
 	}
 	
-	@Override
-	public ArrayList<InsuranceProduct> searchListByApproval(boolean approval) {
-		ArrayList<InsuranceProduct> list = new ArrayList<InsuranceProduct>();
-		try {
-			query = new StringBuffer();
-			query.append("SELECT * FROM insurance_product ");
-			query.append("WHERE approval = ?;");
-			conn = this.getConnection();
-			ptmt = conn.prepareStatement(query.toString());
-			ptmt.setInt(1, approval? 1 : 0);
-			resultSet = ptmt.executeQuery();
-			while(resultSet.next()) {
-				InsuranceProduct insuranceProduct = this.createObject();
-				list.add(insuranceProduct);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			this.close();
-		}
-		return list;
-	}
 }

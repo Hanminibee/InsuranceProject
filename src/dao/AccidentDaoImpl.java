@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import entity.Accident;
+import entity.Client;
+import entity.InsuranceProduct;
 
 public class AccidentDaoImpl implements AccidentDao{
 	
@@ -88,8 +90,23 @@ public class AccidentDaoImpl implements AccidentDao{
 	}
 
 	@Override
-	public Accident search() {
-		// TODO Auto-generated method stub
+	public Accident search(int accidentNum) {
+		try {
+			query = new StringBuffer();
+			query.append("SELECT * FROM accidents ");
+			query.append("WHERE accident_num = ?");
+			conn = this.getConnection();
+			ptmt = conn.prepareStatement(query.toString());
+			ptmt.setInt(1, accidentNum);
+			resultSet = ptmt.executeQuery();
+			if(resultSet.next()) {
+				return this.createObject();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			this.close();
+		}
 		return null;
 	}
 
@@ -114,9 +131,17 @@ public class AccidentDaoImpl implements AccidentDao{
 		return list;
 	}
 	
-	private Accident createObject() {
+	private Accident createObject() throws SQLException {
 		Accident accident = new Accident();
-		
+		accident.setAccidentNum(resultSet.getInt("accident_num"));
+		accident.setAccidentDetail(resultSet.getString("accident_detail"));
+		accident.setReceptionDate((Date)resultSet.getDate("reception_date"));
+		Client client = new Client();
+		client.setId(resultSet.getString("client_Id"));
+		accident.setClient(client);
+		InsuranceProduct insuranceProduct = new InsuranceProduct();
+		insuranceProduct.setProductName(resultSet.getString("insurance_product_name"));
+		accident.setInsuranceProduct(insuranceProduct);
 		return accident;
 	}
 

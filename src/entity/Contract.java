@@ -35,6 +35,10 @@ public class Contract {
 	public Date getInsuranceExpiryDate() {
 		return insuranceExpiryDate;
 	}
+	
+	public void setInsuranceExpiryDate(Date insuranceExpiryDate) {
+		this.insuranceExpiryDate = insuranceExpiryDate;
+	}
 
 	public void setInsuranceExpiryDate(int paymentPeriod) {
 		Calendar ca = Calendar.getInstance();

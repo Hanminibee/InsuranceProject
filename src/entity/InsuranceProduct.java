@@ -2,8 +2,9 @@ package entity;
 
 import type.InsuranceProductType;
 
-public class InsuranceProduct implements Cloneable{
+public class InsuranceProduct implements Cloneable {
 
+	private int insuranceProductNum;
 	private String productName;
 	protected int basicInsurancePremium;
 	private int insuranceMoney;
@@ -11,6 +12,14 @@ public class InsuranceProduct implements Cloneable{
 	private int paymentCycle;
 	private int paymentPeriod;
 	private boolean approval;
+
+	public int getInsuranceProductNum() {
+		return insuranceProductNum;
+	}
+
+	public void setInsuranceProductNum(int insuranceProductNum) {
+		this.insuranceProductNum = insuranceProductNum;
+	}
 
 	public InsuranceProduct() {
 		this.approval = false;
@@ -64,11 +73,11 @@ public class InsuranceProduct implements Cloneable{
 	public void setPaymentPeriod(int paymentPeriod) {
 		this.paymentPeriod = paymentPeriod;
 	}
-	
+
 	public double calculationRate(Client client) {
 		return basicInsurancePremium;
 	}
-	
+
 	public boolean isApproval() {
 		return approval;
 	}
@@ -78,21 +87,20 @@ public class InsuranceProduct implements Cloneable{
 	}
 
 	public void RegisterClient() {
-		
+
 	}
 
 	public InsuranceProduct clone() {
 		try {
-			return (InsuranceProduct)super.clone();
+			return (InsuranceProduct) super.clone();
 		} catch (CloneNotSupportedException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
-	public int getApproval() { //jdbc
-		return this.approval? 1 : 0;
-	}
 
+	public int getApproval() { // jdbc
+		return this.approval ? 1 : 0;
+	}
 
 }
