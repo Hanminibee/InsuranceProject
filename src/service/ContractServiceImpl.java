@@ -28,32 +28,34 @@ public class ContractServiceImpl implements ContractService {
 	}
 
 	public ArrayList<Contract> selectByApproval(boolean approval) {
-		ArrayList<Contract> list = contractList.getContractList();
-		for (Contract contract : list) {
-			if (contract.isApproval()==approval)
+		ArrayList<Contract> list = new ArrayList<Contract>();
+		for (Contract contract : contractList.getContractList()) {
+			if (contract.isApproval() == approval)
 				list.add(contract);
 		}
 		return list;
 	}
+	
 	public ArrayList<Contract> selectByInsuranceProductType (InsuranceProductType insuranceProductType) {
-		ArrayList<Contract> list = this.selectByApproval(true);
-		for (Contract contract : list) {
+		ArrayList<Contract> list = new ArrayList<Contract>();
+		for (Contract contract : this.selectByApproval(true)) {
 			if (contract.getInsuranceProduct().getInsuranceProductType() == insuranceProductType)
 				list.add(contract);
 		}
 		return list;
 	}
+	
 	public ArrayList<Contract> selectByExpiredDate (InsuranceProductType insuranceProductType) {
-		ArrayList<Contract> list = this.selectByInsuranceProductType(insuranceProductType);
-		for (Contract contract : list) {
+		ArrayList<Contract> list = new ArrayList<Contract>();
+		for (Contract contract : this.selectByInsuranceProductType(insuranceProductType)) {
 			if (contract.getInsuranceExpiryDate().before(new Date()) ) 
 				list.add(contract);
 		}
 		return list;
 	}
+	
 	public boolean deleteExpiredContract (Contract contract) {
 		return contractList.delete(contract);
-		
 	}
 
 	// accident

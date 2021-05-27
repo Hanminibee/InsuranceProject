@@ -731,7 +731,7 @@ public class ConsoleController {
 				break;
 			case 3:
 				managerLogin = null;
-				break;
+				return;
 			}
 		}
 	}
@@ -741,7 +741,14 @@ public class ConsoleController {
 		System.out.println("1. 네" + " 2. 아니요");
 		switch(sc.nextInt()) {
 		case 1:
-			this.clientLoginMenu();
+			sc.nextLine();
+			if (clientLogin == null) {
+				System.out.println("--고객의 ID를 입력해주세요.--");
+				String id = sc.nextLine();
+				System.out.println("--고객의 PassWord를 입력해주세요.--");
+				String pw = sc.nextLine();
+				clientLogin = clientService.login(id, pw);
+			}
 			Contract contract = new Contract () ;
 			contract.setClient(clientLogin);
 			contract.setInsuranceProduct(selectInsuranceProduct);
@@ -750,6 +757,7 @@ public class ConsoleController {
 			contract.setSalesPerson((SalesPerson)managerLogin);
 			contractService.registerInsuracneProduct(contract);
 			clientLogin = null;
+			System.out.println("보험의 임시 계약이 완료되었습니다. 인수심사가 완료될때까지 기다려주세요.");
 		case 2:
 			return;
 		}

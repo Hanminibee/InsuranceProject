@@ -1,12 +1,18 @@
 package list;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import entity.Client;
 
 public class ClientListImpl implements ClientList {
 	ArrayList<Client> clientList = new ArrayList<Client>();
+	
+	public ClientListImpl() {
+		Client client = new Client();
+		client.setId("a");
+		client.setPassword("a");
+		this.add(client);
+	}
 
 	public ArrayList<Client> getClientList() {
 		return this.clientList;
