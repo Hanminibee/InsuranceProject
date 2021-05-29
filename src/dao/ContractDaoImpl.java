@@ -57,8 +57,8 @@ public class ContractDaoImpl implements ContractDao{
 			ptmt = conn.prepareStatement(query.toString());
 			ptmt.setString(1, contract.getClient().getId());
 			ptmt.setString(2, contract.getInsuranceProduct().getProductName());
-			ptmt.setDate(3, (Date)contract.getInsuranceContractDate());
-			ptmt.setDate(4, (Date)contract.getInsuranceExpiryDate());
+			ptmt.setDate(3, new Date(contract.getInsuranceContractDate().getTime()));
+			ptmt.setDate(4, new Date(contract.getInsuranceExpiryDate().getTime()));
 			ptmt.setString(5, contract.getSalesPerson().getId());
 			ptmt.setInt(6, contract.isApproval()? 1 : 0);
 			int rowAmount = ptmt.executeUpdate();
@@ -174,8 +174,8 @@ public class ContractDaoImpl implements ContractDao{
 			query.append("WHERE client_id = ? AND insurance_product_name = ?");
 			conn = this.getConnection();
 			ptmt = conn.prepareStatement(query.toString());
-			ptmt.setDate(1, (Date)contract.getInsuranceContractDate());
-			ptmt.setDate(2, (Date)contract.getInsuranceExpiryDate());
+			ptmt.setDate(1, new Date(contract.getInsuranceContractDate().getTime()));
+			ptmt.setDate(2, new Date(contract.getInsuranceExpiryDate().getTime()));
 			ptmt.setString(3, contract.getSalesPerson().getId());
 			ptmt.setInt(4, contract.isApproval()? 1 : 0);
 			ptmt.setString(5, contract.getClient().getId());
@@ -189,6 +189,27 @@ public class ContractDaoImpl implements ContractDao{
 			this.close();
 		}
 		return success;
+	}
+	
+	public ArrayList<Contract> findAll(){
+		ArrayList<Contract> list = new ArrayList<Contract>();
+		try {
+			query = new StringBuffer();
+			query.append("SELECT * FROM contracts;");
+			conn = this.getConnection();
+			ptmt = conn.prepareStatement(query.toString());
+			resultSet = ptmt.executeQuery();
+			while(resultSet.next()) {
+				Contract contract = this.createObject();
+				list.add(contract);
+			}
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			this.close();
+		}
+		return null;
 	}
 	
 	private Contract createObject() throws SQLException {

@@ -21,12 +21,14 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao {
 	private Connection conn;
 	private PreparedStatement ptmt;
 	private ResultSet resultSet;
+	private ResultSet subResultSet;
 
 	public InsuranceProductDaoImpl() {
 		this.query = null;
 		this.conn = null;
 		this.ptmt = null;
 		this.resultSet = null;
+		this.subResultSet = null;
 	}
 
 	private Connection getConnection() throws SQLException {
@@ -80,6 +82,7 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao {
 				conn = this.getConnection();
 				ptmt = conn.prepareStatement(query.toString());
 				ptmt.setString(1, actualExpense.getProductName());
+				System.out.println(actualExpense.getActualExpenseType().toString());
 				ptmt.setString(2, actualExpense.getActualExpenseType().toString());
 				ptmt.setInt(3, actualExpense.getLimitOfIndemnity());
 				ptmt.setInt(4, actualExpense.getLimitAge());
@@ -135,7 +138,7 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao {
 			query = new StringBuffer();
 			query.append("UPDATE insurance_product ");
 			query.append("SET insurance_product_name = ?, basic_insurance_premium = ?, insurance_money = ?, "
-							+ "payment_cycle = ?, payment_period = ?, approval = ?");
+							+ "payment_cycle = ?, payment_period = ?, approval = ? ");
 			query.append("WHERE insurance_product_num = ?;");
 			conn = this.getConnection();
 			ptmt = conn.prepareStatement(query.toString());
@@ -196,7 +199,9 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao {
 				ptmt.setInt(2, life.getRequiredPaymentPeriod());
 				break;
 			}
-			ptmt.executeUpdate();
+			int rowAmount = ptmt.executeUpdate();
+			if(rowAmount > 0)
+				success = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -279,39 +284,39 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao {
 			case ACTUALEXPENSE:
 				query = new StringBuffer();
 				query.append("SELECT * FROM insurance_product JOIN actual_expenses ");
-				query.append("ON insurance_product_name = ?;");
+				query.append("ON insurance_product.insurance_product_name = ?;");
 				conn = this.getConnection();
 				ptmt = conn.prepareStatement(query.toString());
 				ptmt.setString(1, productName);
-				resultSet = ptmt.executeQuery();
-				return createActualExpense();
+				subResultSet = ptmt.executeQuery();
+				if(subResultSet.next()) return createActualExpense();
 			case CANCER:
 				query = new StringBuffer();
 				query.append("SELECT * FROM insurance_product JOIN cancers ");
-				query.append("ON insurance_product_name = ?;");
+				query.append("ON insurance_product.insurance_product_name = ?;");
 				conn = this.getConnection();
 				ptmt = conn.prepareStatement(query.toString());
 				ptmt.setString(1, productName);
-				resultSet = ptmt.executeQuery();
-				return createCancer();
+				subResultSet = ptmt.executeQuery();
+				if(subResultSet.next()) return createCancer();
 			case PENSION:
 				query = new StringBuffer();
 				query.append("SELECT * FROM insurance_product JOIN pensions ");
-				query.append("ON insurance_product_name = ?;");
+				query.append("ON insurance_product.insurance_product_name = ?;");
 				conn = this.getConnection();
 				ptmt = conn.prepareStatement(query.toString());
 				ptmt.setString(1, productName);
-				resultSet = ptmt.executeQuery();
-				return createPension();
+				subResultSet = ptmt.executeQuery();
+				if(subResultSet.next()) return createPension();
 			case LIFE:
 				query = new StringBuffer();
 				query.append("SELECT * FROM insurance_product JOIN lifes ");
-				query.append("ON insurance_product_name = ?;");
+				query.append("ON insurance_product.insurance_product_name = ?;");
 				conn = this.getConnection();
 				ptmt = conn.prepareStatement(query.toString());
 				ptmt.setString(1, productName);
-				resultSet = ptmt.executeQuery();
-				return createLife();
+				subResultSet = ptmt.executeQuery();
+				if(subResultSet.next()) return createLife();
 		}
 		return null;
 	}
@@ -319,47 +324,47 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao {
 	private ActualExpense createActualExpense() throws SQLException {
 		ActualExpense actualExpense = new ActualExpense();
 		actualExpense.setInsuranceProductType(InsuranceProductType.ACTUALEXPENSE);
-		actualExpense.setInsuranceProductNum(resultSet.getInt("insurance_product_num"));
-		actualExpense.setProductName(resultSet.getString("insurance_product_name"));
-		actualExpense.setBasicInsurancePremium(resultSet.getInt("basic_insurance_premium"));
-		actualExpense.setInsuranceMoney(resultSet.getInt("insurance_money"));
-		actualExpense.setPaymentCycle(resultSet.getInt("payment_cycle"));
-		actualExpense.setPaymentPeriod(resultSet.getInt("payment_period"));
-		actualExpense.setApproval((resultSet.getInt("approval")==1)? true : false);
+		actualExpense.setInsuranceProductNum(subResultSet.getInt("insurance_product_num"));
+		actualExpense.setProductName(subResultSet.getString("insurance_product_name"));
+		actualExpense.setBasicInsurancePremium(subResultSet.getInt("basic_insurance_premium"));
+		actualExpense.setInsuranceMoney(subResultSet.getInt("insurance_money"));
+		actualExpense.setPaymentCycle(subResultSet.getInt("payment_cycle"));
+		actualExpense.setPaymentPeriod(subResultSet.getInt("payment_period"));
+		actualExpense.setApproval((subResultSet.getInt("approval")==1)? true : false);
 		
-		actualExpense.setActualExpenseType(ActualExpenseType.valueOf(resultSet.getString("actual_expense_type")));
-		actualExpense.setLimitOfIndemnity(resultSet.getInt("limit_of_indemnity"));
-		actualExpense.setLimitAge(resultSet.getInt("limit_age"));
-		actualExpense.setSelfPayment(resultSet.getInt("self_payment"));
+		actualExpense.setActualExpenseType(ActualExpenseType.valueOf(subResultSet.getString("actual_expense_type")));
+		actualExpense.setLimitOfIndemnity(subResultSet.getInt("limit_of_indemnity"));
+		actualExpense.setLimitAge(subResultSet.getInt("limit_age"));
+		actualExpense.setSelfPayment(subResultSet.getInt("self_payment"));
 		return actualExpense;
 	}
 
 	private InsuranceProduct createCancer() throws SQLException {
 		Cancer cancer = new Cancer();
 		cancer.setInsuranceProductType(InsuranceProductType.CANCER);
-		cancer.setInsuranceProductNum(resultSet.getInt("insurance_product_num"));
-		cancer.setProductName(resultSet.getString("insurance_product_name"));
-		cancer.setBasicInsurancePremium(resultSet.getInt("basic_insurance_premium"));
-		cancer.setInsuranceMoney(resultSet.getInt("insurance_money"));
-		cancer.setPaymentCycle(resultSet.getInt("payment_cycle"));
-		cancer.setPaymentPeriod(resultSet.getInt("payment_period"));
-		cancer.setApproval((resultSet.getInt("approval")==1)? true : false);
+		cancer.setInsuranceProductNum(subResultSet.getInt("insurance_product_num"));
+		cancer.setProductName(subResultSet.getString("insurance_product_name"));
+		cancer.setBasicInsurancePremium(subResultSet.getInt("basic_insurance_premium"));
+		cancer.setInsuranceMoney(subResultSet.getInt("insurance_money"));
+		cancer.setPaymentCycle(subResultSet.getInt("payment_cycle"));
+		cancer.setPaymentPeriod(subResultSet.getInt("payment_period"));
+		cancer.setApproval((subResultSet.getInt("approval")==1)? true : false);
 		
-		cancer.setGuaranteedType(CancerType.valueOf(resultSet.getString("guaranteed_type")));
-		cancer.setLimitAge(resultSet.getInt("limit_age"));
+		cancer.setGuaranteedType(CancerType.valueOf(subResultSet.getString("guaranteed_type")));
+		cancer.setLimitAge(subResultSet.getInt("limit_age"));
 		return cancer;
 	}
 
 	private InsuranceProduct createPension() throws SQLException {
 		Pension pension = new Pension();
 		pension.setInsuranceProductType(InsuranceProductType.PENSION);
-		pension.setInsuranceProductNum(resultSet.getInt("insurance_product_num"));
-		pension.setProductName(resultSet.getString("insurance_product_name"));
-		pension.setBasicInsurancePremium(resultSet.getInt("basic_insurance_premium"));
-		pension.setInsuranceMoney(resultSet.getInt("insurance_money"));
-		pension.setPaymentCycle(resultSet.getInt("payment_cycle"));
-		pension.setPaymentPeriod(resultSet.getInt("payment_period"));
-		pension.setApproval((resultSet.getInt("approval")==1)? true : false);
+		pension.setInsuranceProductNum(subResultSet.getInt("insurance_product_num"));
+		pension.setProductName(subResultSet.getString("insurance_product_name"));
+		pension.setBasicInsurancePremium(subResultSet.getInt("basic_insurance_premium"));
+		pension.setInsuranceMoney(subResultSet.getInt("insurance_money"));
+		pension.setPaymentCycle(subResultSet.getInt("payment_cycle"));
+		pension.setPaymentPeriod(subResultSet.getInt("payment_period"));
+		pension.setApproval((subResultSet.getInt("approval")==1)? true : false);
 		
 		pension.setGuaranteedPeriod(resultSet.getInt("guaranteed_period"));
 		return pension;
@@ -368,15 +373,15 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao {
 	private InsuranceProduct createLife() throws SQLException {
 		Life life = new Life();
 		life.setInsuranceProductType(InsuranceProductType.LIFE);
-		life.setInsuranceProductNum(resultSet.getInt("insurance_product_num"));
-		life.setProductName(resultSet.getString("insurance_product_name"));
-		life.setBasicInsurancePremium(resultSet.getInt("basic_insurance_premium"));
-		life.setInsuranceMoney(resultSet.getInt("insurance_money"));
-		life.setPaymentCycle(resultSet.getInt("payment_cycle"));
-		life.setPaymentPeriod(resultSet.getInt("payment_period"));
-		life.setApproval((resultSet.getInt("approval")==1)? true : false);
+		life.setInsuranceProductNum(subResultSet.getInt("insurance_product_num"));
+		life.setProductName(subResultSet.getString("insurance_product_name"));
+		life.setBasicInsurancePremium(subResultSet.getInt("basic_insurance_premium"));
+		life.setInsuranceMoney(subResultSet.getInt("insurance_money"));
+		life.setPaymentCycle(subResultSet.getInt("payment_cycle"));
+		life.setPaymentPeriod(subResultSet.getInt("payment_period"));
+		life.setApproval((subResultSet.getInt("approval")==1)? true : false);
 		
-		life.setRequiredPaymentPeriod(resultSet.getInt("required_payment_period"));
+		life.setRequiredPaymentPeriod(subResultSet.getInt("required_payment_period"));
 		return life;
 	}
 	

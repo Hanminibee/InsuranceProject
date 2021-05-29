@@ -3,14 +3,21 @@ package list;
 import java.util.ArrayList;
 
 import entity.Client;
+import type.ClientJobType;
 
 public class ClientListImpl implements ClientList {
 	ArrayList<Client> clientList = new ArrayList<Client>();
 	
 	public ClientListImpl() {
+		
+		//더미데이터
 		Client client = new Client();
+		client.setName("testClient");
 		client.setId("a");
 		client.setPassword("a");
+		client.setAge(11);
+		client.setGender(true);
+		client.setJob(ClientJobType.AF);
 		this.add(client);
 	}
 

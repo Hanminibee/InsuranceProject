@@ -112,6 +112,27 @@ public class ManagerDaoImpl implements ManagerDao{
 		return null;
 	}
 	
+	@Override
+	public Manager search(String managerId) {
+		try {
+			query = new StringBuffer();
+			query.append("SELECT * FROM managers ");
+			query.append("WHERE manager_id = ?");
+			conn = this.getConnection();
+			ptmt = conn.prepareStatement(query.toString());
+			ptmt.setString(1, managerId);
+			resultSet = ptmt.executeQuery();
+			if(resultSet.next()) {
+				return this.createObject();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			this.close();
+		}
+		return null;
+	}
+	
 	private Manager createObject() throws SQLException {
 		ManagerType managerType = ManagerType.valueOf(resultSet.getString("manager_type"));
 		Manager manager = managerType.getManager().clone();

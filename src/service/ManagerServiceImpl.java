@@ -1,13 +1,13 @@
 package service;
 
+import dao.ManagerDao;
+import dao.ManagerDaoImpl;
 import entity.Manager;
-import list.ManagerList;
-import list.ManagerListImpl;
 public class ManagerServiceImpl implements ManagerService{
-	private ManagerList managerList;
+	private ManagerDao managerList;
 	
 	public ManagerServiceImpl() {
-		this.managerList = new ManagerListImpl();
+		this.managerList = new ManagerDaoImpl();
 	}
 	
 	public void association() {
@@ -24,5 +24,9 @@ public class ManagerServiceImpl implements ManagerService{
 	
 	public boolean delete(String id, String pw) {
 		return managerList.delete(managerList.search(id, pw));
+	}
+	
+	public Manager checkManagerID(String managerID) {
+		return managerList.search(managerID);
 	}
 }

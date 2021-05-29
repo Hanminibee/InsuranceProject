@@ -1,20 +1,16 @@
 package service;
 import java.util.ArrayList;
 
+import dao.InsuranceProductDao;
+import dao.InsuranceProductDaoImpl;
 import entity.InsuranceProduct;
-import list.InsuranceProductList;
-import list.InsuranceProductListImpl;
 
 public class InsuranceProductServiceImpl implements InsuranceProductService{
 	
-	private InsuranceProductList insuranceProductList;
+	private InsuranceProductDao insuranceProductList;
 	
 	public InsuranceProductServiceImpl(){
-		this.insuranceProductList = new InsuranceProductListImpl();
-	}
-
-	public ArrayList<InsuranceProduct> showAllList() {
-		return insuranceProductList.getInsuranceProductList();
+		this.insuranceProductList = new InsuranceProductDaoImpl();
 	}
 	
 	public ArrayList<InsuranceProduct> showInsuranceProductIsApproval(){
@@ -29,8 +25,16 @@ public class InsuranceProductServiceImpl implements InsuranceProductService{
 		return insuranceProductList.add(developedProduct);
 	}
 	
-	public InsuranceProductList getInsuranceProductList() {
+	public InsuranceProductDao getInsuranceProductList() {
 		return this.insuranceProductList;
+	}
+
+	public boolean modifyInsuranceProduct(InsuranceProduct insuranceProduct) {
+		return insuranceProductList.update(insuranceProduct);
+	}
+
+	public boolean deleteInsuranceProduct(InsuranceProduct insuranceProduct) {
+		return insuranceProductList.delete(insuranceProduct);
 	}
 	
 }

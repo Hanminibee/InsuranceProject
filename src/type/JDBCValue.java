@@ -1,10 +1,10 @@
 package type;
 
 public enum JDBCValue {
-	DRIVER("com.mysql.jdbc.Driver"),
-	URL(""),
-	USER(""),
-	PASSWORD("");
+	DRIVER("com.mysql.cj.jdbc.Driver"),
+	URL("jdbc:mysql://localhost:3306/insuranceproject?serverTimezone=UTC"),
+	USER("root"),
+	PASSWORD("426842");
 	
 	private String value;
 	

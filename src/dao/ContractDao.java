@@ -12,4 +12,5 @@ public interface ContractDao {
 	public ArrayList<Contract> searchByClient(String clientID);
 	public ArrayList<Contract> searchBySalesPerson(String salesPerson);
 	public boolean update(Contract contract);
+	public ArrayList<Contract> findAll();
 }
