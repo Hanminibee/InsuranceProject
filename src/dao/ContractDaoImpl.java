@@ -51,8 +51,8 @@ public class ContractDaoImpl implements ContractDao{
 		try {
 			query = new StringBuffer();
 			query.append("INSERT INTO contracts");
-			query.append("(client_id, insurance_product_name, insurance_contract_date, insurance_expiry_date, manager_id, approval) ");
-			query.append("VALUES(?, ?, ?, ?, ?, ?);");
+			query.append("(client_id, insurance_product_name, insurance_contract_date, insurance_expiry_date, manager_id, approval, months) ");
+			query.append("VALUES(?, ?, ?, ?, ?, ?, ?);");
 			conn = this.getConnection();
 			ptmt = conn.prepareStatement(query.toString());
 			ptmt.setString(1, contract.getClient().getId());
@@ -61,6 +61,7 @@ public class ContractDaoImpl implements ContractDao{
 			ptmt.setDate(4, new Date(contract.getInsuranceExpiryDate().getTime()));
 			ptmt.setString(5, contract.getSalesPerson().getId());
 			ptmt.setInt(6, contract.isApproval()? 1 : 0);
+			ptmt.setInt(7, 0);
 			int rowAmount = ptmt.executeUpdate();
 			if(rowAmount > 0)
 				success = true;
@@ -170,7 +171,7 @@ public class ContractDaoImpl implements ContractDao{
 		try {
 			query = new StringBuffer();
 			query.append("UPDATE contracts ");
-			query.append("SET insurance_contract_date = ?, insurance_expiry_date = ?, manager_id = ?, approval = ?");
+			query.append("SET insurance_contract_date = ?, insurance_expiry_date = ?, manager_id = ?, approval = ?, months = ?");
 			query.append("WHERE client_id = ? AND insurance_product_name = ?");
 			conn = this.getConnection();
 			ptmt = conn.prepareStatement(query.toString());
@@ -178,8 +179,9 @@ public class ContractDaoImpl implements ContractDao{
 			ptmt.setDate(2, new Date(contract.getInsuranceExpiryDate().getTime()));
 			ptmt.setString(3, contract.getSalesPerson().getId());
 			ptmt.setInt(4, contract.isApproval()? 1 : 0);
-			ptmt.setString(5, contract.getClient().getId());
-			ptmt.setString(6, contract.getInsuranceProduct().getProductName());
+			ptmt.setInt(5, this.monthBinary(contract.getMonth()));
+			ptmt.setString(6, contract.getClient().getId());
+			ptmt.setString(7, contract.getInsuranceProduct().getProductName());
 			int rowAmount = ptmt.executeUpdate();
 			if(rowAmount > 0)
 				success = true;
@@ -225,8 +227,35 @@ public class ContractDaoImpl implements ContractDao{
 		Manager salesPerson = new SalesPerson();
 		salesPerson.setId(resultSet.getString("manager_id"));
 		contract.setSalesPerson(salesPerson);
+		contract.setMonth(this.monthBitMasking(resultSet.getInt("months")));		
 		contract.setApproval(resultSet.getInt("approval") == 1? true : false);
 		return contract;
+	}
+	
+	private boolean[] monthBitMasking(int months) {
+		boolean[] bMonths = new boolean[12];
+		String binary = String.format("%012d", Integer.parseInt(Integer.toBinaryString(months)));
+		char[] cMonths = binary.toCharArray();
+		for(int i = 11; i >= 0; i--) {
+			if(cMonths[i] == '0') {
+				bMonths[11-i] = false;
+			}else {
+				bMonths[11-i] = true;
+			}
+		}
+		return bMonths;
+	}
+	
+	private int monthBinary(boolean[] months) {
+		StringBuffer sb = new StringBuffer();
+		for(int i = 11; i >= 0; i--) {
+			if(months[i]) {
+				sb.append("1");
+			}else {
+				sb.append("0");
+			}
+		}
+		return Integer.parseInt(sb.toString(), 2);
 	}
 
 }

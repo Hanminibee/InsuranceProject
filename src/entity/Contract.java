@@ -10,6 +10,7 @@ public class Contract {
 	private Date insuranceExpiryDate;
 	private InsuranceProduct insuranceProduct;
 	private Manager salesPerson;
+	private boolean[] month;
 	private boolean approval;
 
 	public Contract() {
@@ -35,7 +36,7 @@ public class Contract {
 	public Date getInsuranceExpiryDate() {
 		return insuranceExpiryDate;
 	}
-	
+
 	public void setInsuranceExpiryDate(Date insuranceExpiryDate) {
 		this.insuranceExpiryDate = insuranceExpiryDate;
 	}
@@ -44,7 +45,7 @@ public class Contract {
 		Calendar ca = Calendar.getInstance();
 		ca.setTime(this.insuranceContractDate);
 		ca.add(Calendar.YEAR, paymentPeriod);
-		this.insuranceExpiryDate = ca.getTime()  ;
+		this.insuranceExpiryDate = ca.getTime();
 	}
 
 	public InsuranceProduct getInsuranceProduct() {
@@ -68,6 +69,14 @@ public class Contract {
 	}
 	public void setApproval(boolean approval) {
 		this.approval = approval;
+	}
+
+	public boolean[] getMonth() {
+		return month;
+	}
+
+	public void setMonth(boolean[] month) {
+		this.month = month;
 	}
 
 }

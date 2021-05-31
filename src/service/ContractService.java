@@ -17,4 +17,8 @@ public interface ContractService {
 	public boolean registerInsuranceProduct(Contract contract);
 	public ArrayList<Contract> searchBySalesPerson(String salesPerson);
 	public boolean modifyContract(Contract contract);
+	
+	public ArrayList<Accident> applyAccidentList();
+	public boolean addApplyAccidentList(Accident accident);//추가
+	public boolean deleteAccidentList(Accident accident);//추가
 }

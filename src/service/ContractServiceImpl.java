@@ -103,8 +103,18 @@ public class ContractServiceImpl implements ContractService {
 		return returnList;
 	}
 	
-	public boolean applyAccident(Accident accident) {
+	public boolean addApplyAccidentList(Accident accident) {
 		return accidentList.add(accident);
 	}
 
+	@Override
+	public ArrayList<Accident> applyAccidentList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean deleteAccidentList(Accident accident) {
+		return accidentList.delete(accident);
+	}
 }
