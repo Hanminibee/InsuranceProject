@@ -13,7 +13,7 @@ public interface ContractService {
 	public ArrayList<Accident> showAccidentListByProductType(InsuranceProductType insuranceProductType);
 	public ArrayList<Contract> selectByInsuranceProductType(InsuranceProductType insuranceProductType);
 	public ArrayList<Contract> selectByExpiredDate(InsuranceProductType insuranceProductType);
-	public boolean deleteExpiredContract(Contract contract);
+	public boolean deleteContract(Contract contract);
 	public boolean registerInsuranceProduct(Contract contract);
 	public ArrayList<Contract> searchBySalesPerson(String salesPerson);
 	public boolean modifyContract(Contract contract);

@@ -1,5 +1,6 @@
 package service;
 
+import dao.ManagerDao;
 import entity.Manager;
 
 public interface ManagerService {
@@ -9,5 +10,6 @@ public interface ManagerService {
 	public Manager login(String id, String pw);
 	public boolean delete(String id, String pw);
 	public Manager checkManagerID(String managerID);
+	public ManagerDao getManagerList();
 	
 }

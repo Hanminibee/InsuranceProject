@@ -9,10 +9,13 @@ import dao.ClientDao;
 import dao.ContractDao;
 import dao.ContractDaoImpl;
 import dao.InsuranceProductDao;
+import dao.ManagerDao;
 import dao.MedicalHistoryDao;
 import entity.Accident;
 import entity.Client;
 import entity.Contract;
+import entity.InsuranceProduct;
+import entity.Manager;
 import entity.MedicalHistory;
 import type.InsuranceProductType;
 
@@ -23,6 +26,7 @@ public class ContractServiceImpl implements ContractService {
 	private InsuranceProductDao insuranceProductList;
 	private ClientDao clientList;
 	private MedicalHistoryDao medicalHistoryList;
+	private ManagerDao managerList;
 	
 	public ContractServiceImpl() {
 		this.contractList = new ContractDaoImpl();
@@ -33,6 +37,7 @@ public class ContractServiceImpl implements ContractService {
 		this.insuranceProductList = associationObject.getInsuranceProductList();
 		this.clientList = associationObject.getClientList();
 		this.medicalHistoryList = associationObject.getMedicalHistoryList();
+		this.managerList = associationObject.getManagerList();
 	}
 
 	public ArrayList<Contract> selectByApproval(boolean approval) {
@@ -62,7 +67,7 @@ public class ContractServiceImpl implements ContractService {
 		return list;
 	}
 	
-	public boolean deleteExpiredContract (Contract contract) {
+	public boolean deleteContract (Contract contract) {
 		return contractList.delete(contract);
 	}
 	
@@ -84,11 +89,13 @@ public class ContractServiceImpl implements ContractService {
 			contract.setInsuranceProduct(insuranceProductList.search(contract.getInsuranceProduct().getProductName()));
 			Client client = clientList.search(contract.getClient().getId());
 			MedicalHistory medicalHistory = medicalHistoryList.search(client.getId());
+			Manager salesPerson = managerList.search(contract.getSalesPerson().getId());
 			client.getMedicalHistory().setClientCancerCareer(medicalHistory.getClientCancerCareer());
 			client.getMedicalHistory().setFamilyCancerCareer(medicalHistory.getFamilyCancerCareer());
 			client.getMedicalHistory().setNumberOfHospitalizations(medicalHistory.getNumberOfHospitalizations());
 			client.getMedicalHistory().setNumberOfHospitalVisits(medicalHistory.getNumberOfHospitalVisits());
 			contract.setClient(client);
+			contract.setSalesPerson(salesPerson);
 		}
 		return list;
 	}
@@ -97,6 +104,7 @@ public class ContractServiceImpl implements ContractService {
 	public ArrayList<Accident> showAccidentListByProductType(InsuranceProductType insuranceProductType) {
 		ArrayList<Accident> returnList = new ArrayList<Accident>();
 		for (Accident accident : accidentList.findAll()) {
+			accident = insertAccidentInfo(accident);
 			if (insuranceProductType == accident.getInsuranceProduct().getInsuranceProductType())
 				returnList.add(accident);
 		}
@@ -109,12 +117,23 @@ public class ContractServiceImpl implements ContractService {
 
 	@Override
 	public ArrayList<Accident> applyAccidentList() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Accident> returnList = new ArrayList<Accident>();
+		for (Accident accident : accidentList.findAll()) {
+			returnList.add(insertAccidentInfo(accident));
+		}
+		return returnList;
 	}
 
 	@Override
 	public boolean deleteAccidentList(Accident accident) {
 		return accidentList.delete(accident);
+	}
+	
+	private Accident insertAccidentInfo(Accident accident) {
+		InsuranceProduct insuranceProduct = insuranceProductList.search(accident.getInsuranceProduct().getProductName());
+		Client client = clientList.search(accident.getClient().getId());
+		accident.setInsuranceProduct(insuranceProduct);
+		accident.setClient(client);
+		return accident;
 	}
 }

@@ -9,4 +9,6 @@ public interface ClientService {
 	public Client checkClientID(String clientID);
 	public ClientDao getClientList();
 	public MedicalHistoryDao getMedicalHistoryList();
+	public boolean addMedicalHistory(Client clientLogin);
+	public boolean modifyMedicalHistory(Client clientLogin);
 }

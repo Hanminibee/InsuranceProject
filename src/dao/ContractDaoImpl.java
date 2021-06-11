@@ -79,7 +79,7 @@ public class ContractDaoImpl implements ContractDao{
 		try {
 			query = new StringBuffer();
 			query.append("DELETE FROM contracts ");
-			query.append("WHERE client_id = ? AND insurance_product_name");
+			query.append("WHERE client_id = ? AND insurance_product_name = ?");
 			conn = this.getConnection();
 			ptmt = conn.prepareStatement(query.toString());
 			ptmt.setString(1, contract.getClient().getId());
@@ -171,7 +171,7 @@ public class ContractDaoImpl implements ContractDao{
 		try {
 			query = new StringBuffer();
 			query.append("UPDATE contracts ");
-			query.append("SET insurance_contract_date = ?, insurance_expiry_date = ?, manager_id = ?, approval = ?, months = ?");
+			query.append("SET insurance_contract_date = ?, insurance_expiry_date = ?, manager_id = ?, approval = ?, months = ? ");
 			query.append("WHERE client_id = ? AND insurance_product_name = ?");
 			conn = this.getConnection();
 			ptmt = conn.prepareStatement(query.toString());
@@ -234,7 +234,7 @@ public class ContractDaoImpl implements ContractDao{
 	
 	private boolean[] monthBitMasking(int months) {
 		boolean[] bMonths = new boolean[12];
-		String binary = String.format("%012d", Integer.parseInt(Integer.toBinaryString(months)));
+		String binary = String.format("%012d", Long.parseLong(Integer.toBinaryString(months)));
 		char[] cMonths = binary.toCharArray();
 		for(int i = 11; i >= 0; i--) {
 			if(cMonths[i] == '0') {

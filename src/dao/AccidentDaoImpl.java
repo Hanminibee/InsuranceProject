@@ -56,7 +56,7 @@ public class AccidentDaoImpl implements AccidentDao{
 			ptmt.setString(1, accident.getClient().getId());
 			ptmt.setString(2, accident.getInsuranceProduct().getProductName());
 			ptmt.setString(3, accident.getAccidentDetail());
-			ptmt.setDate(4, (Date)accident.getReceptionDate());
+			ptmt.setDate(4, new Date(accident.getReceptionDate().getTime()));
 			int rowAmount = ptmt.executeUpdate();
 			if(rowAmount > 0)
 				success = true;

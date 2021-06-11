@@ -155,48 +155,48 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao {
 			switch(insuranceProduct.getInsuranceProductType()) {
 			case ACTUALEXPENSE:
 				ActualExpense actualExpense = (ActualExpense)insuranceProduct;
-				query.append("INSERT INTO actual_expenses");
-				query.append("(insurance_product_name, actual_expense_type, limit_of_indemnity, "
-								+ "limit_age, self_payment)");
-				query.append("VALUES(?, ?, ?, ?, ?);");
+				query.append("UPDATE actual_expenses ");
+				query.append("SET actual_expense_type = ?, limit_of_indemnity = ?, "
+								+ "limit_age = ?, self_payment = ? ");
+				query.append("WHERE insurance_product_name = ?;");
 				conn = this.getConnection();
 				ptmt = conn.prepareStatement(query.toString());
-				ptmt.setString(1, actualExpense.getProductName());
-				ptmt.setString(2, actualExpense.getActualExpenseType().toString());
-				ptmt.setInt(3, actualExpense.getLimitOfIndemnity());
-				ptmt.setInt(4, actualExpense.getLimitAge());
-				ptmt.setInt(5, actualExpense.getSelfPayment());
+				ptmt.setString(1, actualExpense.getActualExpenseType().toString());
+				ptmt.setInt(2, actualExpense.getLimitOfIndemnity());
+				ptmt.setInt(3, actualExpense.getLimitAge());
+				ptmt.setInt(4, actualExpense.getSelfPayment());
+				ptmt.setString(5, actualExpense.getProductName());
 				break;
 			case CANCER:
 				Cancer cancer = (Cancer)insuranceProduct;
-				query.append("INSERT INTO cancers");
-				query.append("(insurance_product_name, guaranteed_type, limit_age)");
-				query.append("VALUES(?, ?, ?);");
+				query.append("UPDATE cancers ");
+				query.append("SET guaranteed_type = ?, limit_age = ? ");
+				query.append("WHERE insurance_product_name = ?;");
 				conn = this.getConnection();
 				ptmt = conn.prepareStatement(query.toString());
-				ptmt.setString(1, cancer.getProductName());
-				ptmt.setString(2, cancer.getGuaranteedType().toString());
-				ptmt.setInt(3, cancer.getLimitAge());
+				ptmt.setString(1, cancer.getGuaranteedType().toString());
+				ptmt.setInt(2, cancer.getLimitAge());
+				ptmt.setString(3, cancer.getProductName());
 				break;
 			case PENSION:
 				Pension pension = (Pension)insuranceProduct;
-				query.append("INSERT INTO pensions");
-				query.append("(insurance_product_name, guaranteed_period)");
-				query.append("VALUES(?, ?);");
+				query.append("UPDATE pensions ");
+				query.append("SET guaranteed_period = ? ");
+				query.append("WHERE insurance_product_name = ?;");
 				conn = this.getConnection();
 				ptmt = conn.prepareStatement(query.toString());
-				ptmt.setString(1, pension.getProductName());
-				ptmt.setInt(2, pension.getGuaranteedPeriod());
+				ptmt.setInt(1, pension.getGuaranteedPeriod());
+				ptmt.setString(2, pension.getProductName());
 				break;
 			case LIFE:
 				Life life = (Life)insuranceProduct;
-				query.append("INSERT INTO lifes");
-				query.append("(insurance_product_name, required_payment_period)");
-				query.append("VALUES(?, ?);");
+				query.append("UPDATE lifes ");
+				query.append("SET required_payment_period = ? ");
+				query.append("WHERE insurance_product_name = ?;");
 				conn = this.getConnection();
 				ptmt = conn.prepareStatement(query.toString());
-				ptmt.setString(1, life.getProductName());
-				ptmt.setInt(2, life.getRequiredPaymentPeriod());
+				ptmt.setInt(1, life.getRequiredPaymentPeriod());
+				ptmt.setString(2, life.getProductName());
 				break;
 			}
 			int rowAmount = ptmt.executeUpdate();
@@ -366,7 +366,7 @@ public class InsuranceProductDaoImpl implements InsuranceProductDao {
 		pension.setPaymentPeriod(subResultSet.getInt("payment_period"));
 		pension.setApproval((subResultSet.getInt("approval")==1)? true : false);
 		
-		pension.setGuaranteedPeriod(resultSet.getInt("guaranteed_period"));
+		pension.setGuaranteedPeriod(subResultSet.getInt("guaranteed_period"));
 		return pension;
 	}
 

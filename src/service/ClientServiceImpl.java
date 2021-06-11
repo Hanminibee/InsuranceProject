@@ -16,8 +16,7 @@ public class ClientServiceImpl implements ClientService {
 	}
 	
 	public Client checkClientID(String clientID) {
-		Client client = clientList.search(clientID);
-		return this.insertMedicalHistory(client);
+		return clientList.search(clientID);
 	}
 
 	public void association() {
@@ -44,12 +43,24 @@ public class ClientServiceImpl implements ClientService {
 		return this.medicalHistoryList;
 	}
 	
+	public boolean addMedicalHistory(Client clientLogin) {
+		return medicalHistoryList.add(clientLogin.getId(), clientLogin.getMedicalHistory());
+	}
+	
+	public boolean modifyMedicalHistory(Client clientLogin) {
+		return medicalHistoryList.update(clientLogin.getId(), clientLogin.getMedicalHistory());
+	}
+	
 	private Client insertMedicalHistory(Client client) {
-		MedicalHistory medicalHistory = medicalHistoryList.search(client.getId());
-		client.getMedicalHistory().setClientCancerCareer(medicalHistory.getClientCancerCareer());
-		client.getMedicalHistory().setFamilyCancerCareer(medicalHistory.getClientCancerCareer());
-		client.getMedicalHistory().setNumberOfHospitalizations(medicalHistory.getNumberOfHospitalizations());
-		client.getMedicalHistory().setNumberOfHospitalVisits(medicalHistory.getNumberOfHospitalVisits());
+		if(client != null) {
+			MedicalHistory medicalHistory = medicalHistoryList.search(client.getId());
+			if(medicalHistory != null) {
+				client.getMedicalHistory().setClientCancerCareer(medicalHistory.getClientCancerCareer());
+				client.getMedicalHistory().setFamilyCancerCareer(medicalHistory.getClientCancerCareer());
+				client.getMedicalHistory().setNumberOfHospitalizations(medicalHistory.getNumberOfHospitalizations());
+				client.getMedicalHistory().setNumberOfHospitalVisits(medicalHistory.getNumberOfHospitalVisits());
+			}
+		}
 		return client;
 	}
 }

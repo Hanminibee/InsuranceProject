@@ -1,5 +1,6 @@
 package entity;
 
+import type.CancerType;
 import type.ClientJobType;
 
 public class Client {
@@ -22,6 +23,10 @@ public class Client {
 
 	public Client() {
 		this.medicalHistory = new MedicalHistory();
+		this.medicalHistory.setClientCancerCareer(CancerType.HEALTHY);
+		this.medicalHistory.setFamilyCancerCareer(CancerType.HEALTHY);
+		this.medicalHistory.setNumberOfHospitalizations(0);
+		this.medicalHistory.setNumberOfHospitalVisits(0);
 	}
 
 	// Getters & Setters
@@ -116,26 +121,6 @@ public class Client {
 
 	public void setJob(ClientJobType job) {
 		this.job = job;
-	}
-
-	public void ApplyAccidentReception() {
-
-	}
-
-	public void Login() {
-
-	}
-
-	public void Logout() {
-
-	}
-
-	// public void PayInsurancePremium(InsuranceProducts InsuranceProducts){
-	//
-	// }
-
-	public void SignUp() {
-
 	}
 
 }

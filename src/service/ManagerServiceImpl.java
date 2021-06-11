@@ -23,10 +23,18 @@ public class ManagerServiceImpl implements ManagerService{
 	}
 	
 	public boolean delete(String id, String pw) {
-		return managerList.delete(managerList.search(id, pw));
+		Manager manager = managerList.search(id, pw);
+		if(manager != null)
+			return managerList.delete(manager);
+		else 
+			return false;
 	}
 	
 	public Manager checkManagerID(String managerID) {
 		return managerList.search(managerID);
+	}
+
+	public ManagerDao getManagerList() {
+		return this.managerList;
 	}
 }
