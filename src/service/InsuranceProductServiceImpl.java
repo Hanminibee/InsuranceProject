@@ -36,5 +36,9 @@ public class InsuranceProductServiceImpl implements InsuranceProductService{
 	public boolean deleteInsuranceProduct(InsuranceProduct insuranceProduct) {
 		return insuranceProductList.delete(insuranceProduct);
 	}
+
+	public InsuranceProduct searchInsuranceProduct(String productName) {
+		return insuranceProductList.search(productName);
+	}
 	
 }

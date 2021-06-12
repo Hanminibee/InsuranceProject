@@ -314,6 +314,11 @@ public class ConsoleController {
 			System.out.println("\n상품명을 입력해주세요.");	
 			actualExpense.setProductName(sc.nextLine());
 			
+			while(insuranceProductService.searchInsuranceProduct(actualExpense.getProductName()) != null) {
+				System.out.println("이미 존재하는 제품명입니다. 다시 입력해주세요.");
+				actualExpense.setProductName(sc.nextLine());
+			}
+			
 			System.out.println("기본보험료를 입력하세요. (단위: ?원)");
 			actualExpense.setBasicInsurancePremium(sc.nextInt());
 			
@@ -358,6 +363,11 @@ public class ConsoleController {
 			System.out.println("\n상품명을 입력해주세요.");
 			cancer.setProductName(sc.nextLine());
 			
+			while(insuranceProductService.searchInsuranceProduct(cancer.getProductName()) != null) {
+				System.out.println("이미 존재하는 제품명입니다. 다시 입력해주세요.");
+				cancer.setProductName(sc.nextLine());
+			}
+			
 			System.out.println("기본보험료를 입력하세요. (단위: ?원)");
 			cancer.setBasicInsurancePremium(sc.nextInt());
 			
@@ -397,6 +407,11 @@ public class ConsoleController {
 			System.out.println("상품명을 입력해주세요.");
 			pension.setProductName(sc.nextLine());
 			
+			while(insuranceProductService.searchInsuranceProduct(pension.getProductName()) != null) {
+				System.out.println("이미 존재하는 제품명입니다. 다시 입력해주세요.");
+				pension.setProductName(sc.nextLine());
+			}
+			
 			System.out.println("기본보험료를 입력해주세요. (단위: ?원)");
 			pension.setBasicInsurancePremium(sc.nextInt());	
 			
@@ -426,6 +441,11 @@ public class ConsoleController {
 			System.out.println("--종신보험을 개발합니다.--");
 			System.out.println("상품명을 입력해주세요.");
 			life.setProductName(sc.nextLine());
+			
+			while(insuranceProductService.searchInsuranceProduct(life.getProductName()) != null) {
+				System.out.println("이미 존재하는 제품명입니다. 다시 입력해주세요.");
+				life.setProductName(sc.nextLine());
+			}
 			
 			System.out.println("기본보험료를 입력해주세요. (단위: ?원)");
 			life.setBasicInsurancePremium(sc.nextInt());
@@ -551,18 +571,20 @@ public class ConsoleController {
 		}
 	}
 	
-	private void emailSend() {//이메일 보내기 (21.05.18) + 발신자, 수신자, 내용 입력 할 수 있게 수정 (21.05.24)
+	private void emailSend() {//이메일 보내기
 		System.out.println("보험상품승인자의 이메일을 입력해주세요.(gmail을 입력해주세요.)");
-		String user = sc.next(); // gmail계정
+		String user = sc.next(); // gmail 계정 입력
+		System.out.println(user);
 		System.out.println("보험상품승인자의 이메일 Password를 입력해주세요.");
-		String password = sc.next(); // 패스워드
+		String password = sc.next(); // gmail 계정 패스워드 입력
+		System.out.println(password);
 		System.out.println("금융감독원 이메일을 입력해주세요.");
-		String fssEmail = sc.next();
+		String fssEmail = sc.next(); // 금융감독원 email 입력
 		System.out.println("메일 제목을 입력해주세요.");
 		sc.nextLine();
-		String mailTitle = sc.nextLine();
+		String mailTitle = sc.nextLine(); // 메일 제목 입력
 		System.out.println("메일 내용을 입력해주세요.");
-		String mailContent = sc.nextLine();
+		String mailContent = sc.nextLine(); // 메일 내용 입력
 		System.out.println("메일을 보내는 중입니다. 잠시만 기다려주세요...!");
 		
 		Properties prop = new Properties();
@@ -577,6 +599,7 @@ public class ConsoleController {
 				return new PasswordAuthentication(user, password);
 			}
 		});
+		
 		try {
 			MimeMessage message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(user));
@@ -586,9 +609,9 @@ public class ConsoleController {
 			Transport.send(message); // 전송
 			System.out.println("Message sent successfully...!!");
 		} catch (AddressException e) {
-			e.printStackTrace();
+			System.out.println("잘못된 이메일입니다.");
 		} catch (MessagingException e) {
-			e.printStackTrace();
+			System.out.println("메시지 전송에 실패하였습니다.");
 		}
 	}
 
@@ -927,24 +950,32 @@ public class ConsoleController {
 	}
 	
 	private void showAccidentDetail(CompensationHandle compensationHandle, Accident accident) { // 0611 변경
-		Client client = accident.getClient();
-		System.out.println("[상세정보]");
-		System.out.println("고객 이름: " + client.getName());
-		System.out.println("고객 나이: " + client.getAge());
-		System.out.println("접수 내용: " + accident.getAccidentDetail());
-		System.out.println("접수 날짜:" + accident.getReceptionDate());
+		try {
+			Client client = accident.getClient();
+			System.out.println("[상세정보]");
+			System.out.println("고객 이름: " + client.getName());
+			System.out.println("고객 나이: " + client.getAge());
+			System.out.println("접수 내용: " + accident.getAccidentDetail());
+			System.out.println("접수 날짜:" + accident.getReceptionDate());
 
-		System.out.println("\n1.보험금 입력");
-		System.out.println("2.돌아가기");
-		switch (sc.nextInt()) {
-		case 1:
-			System.out.println("보험금을 입력해주세요.");
-			System.out.println(compensationHandle.payInsuranceMoney(sc.nextInt(), client) ? "보험금 지급이 완료되었습니다."
-					: "보험금 지급에 실패하였습니다.");
-			System.out.println(contractService.deleteAccidentList(accident)? "사고기록 삭제에 성공하였습니다." : "사고기록 삭제에 실패하였습니다.");
-			break;
-		case 2:
-			return;
+			System.out.println("\n1.보험금 입력");
+			System.out.println("2.돌아가기");
+			switch (sc.nextInt()) {
+			case 1:
+				System.out.println("보험금을 입력해주세요.");
+				System.out.println(compensationHandle.payInsuranceMoney(sc.nextInt(), client) ? "보험금 지급이 완료되었습니다."
+						: "보험금 지급에 실패하였습니다.");
+				System.out.println(contractService.deleteAccidentList(accident)? "사고기록 삭제에 성공하였습니다." : "사고기록 삭제에 실패하였습니다.");
+				break;
+			case 2:
+				return;
+			default :
+				System.out.println("잘못된 번호를 입력하였습니다.");
+				break;
+			}	
+		}catch (InputMismatchException e) {
+			sc.next();
+			System.out.println("숫자를 입력해주세요.");
 		}
 	}
 	
@@ -960,7 +991,7 @@ public class ConsoleController {
 					ArrayList<Contract> newList = contractService.searchBySalesPerson (managerLogin.getId());
 					if(newList.isEmpty()) {//계약한 보험이 없을 경우 구현 (21.05.25)
 						System.out.println("---현재 계약한 보험이 없습니다.---");
-						return;
+						break;
 					}else{
 						System.out.println("---상세 정보를 볼 계약의 번호를 입력하세요.---");
 						this.showContractList(newList);
@@ -1205,6 +1236,7 @@ public class ConsoleController {
 					}
 				} else {
 					System.out.println("현재 가입한 보험이 없습니다.");
+					break;
 				}
 			}catch (InputMismatchException e) {
 				sc.next();
@@ -1448,12 +1480,15 @@ public class ConsoleController {
 				client.setEmail(sc.nextLine());
 				sc.nextLine();
 				System.out.println("성별을 입력해주세요. (1.남 2.여)");
-				if (sc.nextInt() == 1) {
+				int genderInt = sc.nextInt();
+				if (genderInt == 1) {
 					client.setGender(true);
 					System.out.println("남자");
-				} else {
+				} else if(genderInt == 2){
 					client.setGender(false);
 					System.out.println("여자");
+				} else {
+					throw new IndexOutOfBoundsException();
 				}
 				System.out.println("직업을 입력해주세요.");
 				System.out.println("1.군인 2.생산직 3.농립어업 4.운전기사 5.기타");
@@ -1513,6 +1548,9 @@ public class ConsoleController {
 				clientLogin = null;//로그인 상태에서 자신의 아이디 삭제할 때 로그아웃(21.05.31)
 				break;
 			case 2:
+				return;
+			default :
+				System.out.println("잘못된 번호를 입력하였습니다.");
 				return;
 			}
 		}else {

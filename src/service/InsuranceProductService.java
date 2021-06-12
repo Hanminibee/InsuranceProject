@@ -9,6 +9,7 @@ public interface InsuranceProductService {
 	
 	public ArrayList<InsuranceProduct> showInsuranceProductIsApproval();
 	public ArrayList<InsuranceProduct> showInsuranceProductIsNotApproval();
+	public InsuranceProduct searchInsuranceProduct(String productName);
 	public boolean addInsuranceProduct(InsuranceProduct developedProduct);
 	public boolean modifyInsuranceProduct(InsuranceProduct insuranceProduct);
 	public boolean deleteInsuranceProduct(InsuranceProduct insuranceProduct);
