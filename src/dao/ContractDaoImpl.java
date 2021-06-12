@@ -234,7 +234,8 @@ public class ContractDaoImpl implements ContractDao{
 	
 	private boolean[] monthBitMasking(int months) {
 		boolean[] bMonths = new boolean[12];
-		String binary = String.format("%012d", Long.parseLong(Integer.toBinaryString(months)));
+		String binary = String.format("%012d", 
+		Long.parseLong(Integer.toBinaryString(months)));
 		char[] cMonths = binary.toCharArray();
 		for(int i = 11; i >= 0; i--) {
 			if(cMonths[i] == '0') {

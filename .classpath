@@ -12,7 +12,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/mysqlJDBC"/>
-	<classpathentry kind="lib" path="C:/Users/KWAK/Desktop/jarFile/javax.mail-api-1.6.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/KWAK/Desktop/jarFile/mysql-connector-java-8.0.25.jar"/>
+	<classpathentry kind="lib" path="C:/Users/KWAK/Desktop/jarFile/javax.mail-api-1.6.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

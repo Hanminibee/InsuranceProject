@@ -594,24 +594,29 @@ public class ConsoleController {
 		prop.put("mail.smtp.ssl.enable", "true");
 		prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 		
-		Session session = Session.getDefaultInstance(prop, new javax.mail.Authenticator() {
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(user, password);
-			}
-		});
-		
+		Session session = Session.getDefaultInstance(prop);
+		MimeMessage message = new MimeMessage(session);
+		Transport transport = null;
 		try {
-			MimeMessage message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(user));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(fssEmail)); // 수신자
 			message.setSubject(mailTitle); // 메일 제목을 입력
 			message.setText(mailContent); // 메일 내용을 입력
-			Transport.send(message); // 전송
+			transport = session.getTransport();
+			transport.connect(user, password);
+			transport.sendMessage(message, message.getAllRecipients());
 			System.out.println("Message sent successfully...!!");
 		} catch (AddressException e) {
-			System.out.println("잘못된 이메일입니다.");
+			System.out.println("금융감독원의 이메일을 잘못 입력하였습니다.");
 		} catch (MessagingException e) {
-			System.out.println("메시지 전송에 실패하였습니다.");
+			System.out.println("메시지 전송에 실패하였습니다. 입력한 내용을 확인해주세요.");
+		} finally {
+			try {
+				transport.close();
+			} catch (MessagingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -1476,9 +1481,9 @@ public class ConsoleController {
 				client.setName(sc.nextLine());
 				System.out.println("나이를 입력해주세요.");
 				client.setAge(sc.nextInt());
+				sc.nextLine();
 				System.out.println("Email을 입력해주세요.");
 				client.setEmail(sc.nextLine());
-				sc.nextLine();
 				System.out.println("성별을 입력해주세요. (1.남 2.여)");
 				int genderInt = sc.nextInt();
 				if (genderInt == 1) {
